@@ -1,0 +1,602 @@
+html {
+    scroll-behavior: smooth;
+}
+
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #ff5197;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease;
+}
+
+#loader.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#everything {
+  display: none;
+}
+
+#everything.show {
+  display: block;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #ffd1e3;
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+* {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body,
+.maincontainer {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+}
+
+/*Top*/
+.topcontainer {
+    height: 15vh;
+}
+
+.topcontainer .navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 120px 0px 100px;
+}
+
+.topcontainer #part2-nav {
+    width: 500px;
+    display: flex;
+}
+
+.topcontainer #part2-nav .sectionsnav {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.topcontainer #part1-nav,
+.topcontainer #part2-nav {
+    display: flex;
+    justify-content: center;
+}
+
+.topcontainer #part1-nav a {
+    font-size: 22px;
+    font-weight: bolder;
+}
+
+.topcontainer #part2-nav .sectionsnav {
+    align-items: center;
+}
+
+.topcontainer #part2-nav .sectionsnav a {
+    font-size: 16px;
+}
+
+.topcontainer #part1-nav a,
+.topcontainer #part2-nav .sectionsnav a {
+    text-decoration: none;
+    color: black;
+    transition: all 0.9s ease-in-out;
+}
+
+.topcontainer #part1-nav a:hover,
+.topcontainer #part2-nav .sectionsnav a:hover {
+    color: rgb(255, 192, 224);
+}
+
+.topcontainer #part2-nav .contact {
+    background-color: rgb(255, 192, 224);
+    border: 2px solid rgb(255, 197, 226);
+    ;
+    border-radius: 25px;
+    width: 130px;
+    height: 40px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(255, 192, 224, 0.3);
+
+    transition: all 0.5s ease;
+}
+
+.topcontainer #part2-nav .contact a {
+    color: white;
+    transition: all 0.5s all;
+}
+
+.topcontainer #part2-nav .contact a:hover {
+    color: rgb(0, 0, 0);
+}
+
+.topcontainer #part2-nav .contact:hover {
+    background-color: rgb(255, 146, 200);
+}
+
+/*Part1 center*/
+
+.stcontainer {
+    height: 100vh;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.pinktop {
+    height: 75vh;
+
+    background: linear-gradient(rgb(255, 171, 221), rgb(255, 201, 233));
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+
+    transition: background-position 0.5s ease-out;
+}
+
+.pinktop:hover {
+    background-position: 200% 50%;
+}
+
+.pinkdown {
+    height: 25vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgb(255, 220, 242);
+    background-size: 200% 200%;
+    background-position: 0% 50%;
+
+    transition: background-position 0.5s ease-out;
+}
+
+.pinkdown:hover {
+    background-position: 200% 50%;
+}
+
+.pinktop .centering {
+    padding: 100px 120px 0px 120px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pinktop .picside img {
+    height: 405px;
+    width: 405px;
+    background-color: black;
+}
+
+.textside {
+    width: 450px;
+    height: 300px;
+}
+
+.textside h1 {
+    font-size: 60px;
+    padding-bottom: 35px;
+}
+
+.textside p {
+    padding-bottom: 35px;
+}
+
+.center p,
+.textside p {
+    font-size: 17px;
+}
+
+.textside a {
+    display: inline-block;
+    background-color: #3e1f3e;
+
+    padding: 8px 30px 8px 30px;
+
+    border: 2px solid #8f458f;
+    border-radius: 20px;
+
+    font-size: 17px;
+    text-decoration: none;
+    color: white;
+
+    transition: all 0.5s ease;
+}
+
+.textside a:hover {
+    background-color: #ce6ace;
+    color: black;
+}
+
+/*List produit*/
+
+.productsc {
+    height: 120vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 115px 0px 115px;
+}
+
+.productsc .listproduits {
+    width: 250vh;
+    height: 92vh;
+}
+
+.productsc .listproduits .sectop {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 50px;
+}
+
+.productsc .listproduits .sectop a {
+    text-decoration: none;
+    font-size: 22px;
+
+    display: inline-block;
+    padding: 2px 35px 2px 35px;
+
+    border: 2px solid #8f458f;
+    border-radius: 50px;
+
+    color: white;
+    background-color: #3e1f3e;
+    transition: all 0.5s ease;
+}
+
+.productsc .listproduits .sectop a:hover {
+    color: black;
+    background-color: #ce6ace;
+}
+
+.productsc .produits {
+    height: 90%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+/*Template produit*/
+
+.templateP {
+    background-color: #bca8c4;
+    border-radius: 25px;
+    box-shadow: 0 10px 20px rgba(228, 53, 255, 0.2);
+
+    height: 99%;
+    width: 57vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 0.5s ease;
+}
+
+.templateP:hover {
+    width: 58vh;
+    height: 100%;
+    box-shadow: 0 10px 20px rgba(228, 53, 255, 0.496);
+}
+
+/*Impair*/
+.templateP2 {
+    background-color: #fbcdd0;
+    border-radius: 25px;
+    box-shadow: 0 10px 20px #fbcdd03b;
+
+    height: 99%;
+    width: 57vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 0.5s ease;
+}
+
+.templateP2:hover {
+    width: 58vh;
+    height: 100%;
+    box-shadow: 0 10px 20px #ffc0c4;
+}
+
+.templateP .toptemp,
+.templateP2 .toptemp {
+    width: 100%;
+    padding-left: 40px;
+    color: white;
+}
+
+.templateP .toptemp h3,
+.templateP2 .toptemp h3 {
+    font-size: 25px;
+}
+
+.templateP .toptemp p,
+.templateP2 .toptemp p {
+    font-size: 17px;
+    color: rgb(245, 245, 245);
+}
+
+.templateP .backgroundtemp,
+.templateP2 .backgroundtemp {
+    padding-top: 15px;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    padding-bottom: 25px;
+}
+
+.templateP .downtemp,
+.templateP2 .downtemp {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+/*BTNS*/
+.templateP .downtemp a {
+    text-decoration: none;
+    font-size: 19px;
+
+    display: inline-block;
+    padding: 2px 10px 2px 10px;
+
+    border: 2px solid #956595;
+    border-radius: 50px;
+
+    color: white;
+    background-color: #a774a7;
+    transition: all 0.5s ease;
+}
+
+.templateP .downtemp a:hover {
+    background-color: #ce6ace;
+    font-size: 20px;
+}
+
+.templateP2 .downtemp a {
+    text-decoration: none;
+    font-size: 19px;
+
+    display: inline-block;
+    padding: 2px 10px 2px 10px;
+
+    border: 2px solid hsl(356, 100%, 85%);
+    border-radius: 50px;
+
+    color: white;
+    background-color: hsl(356, 97%, 87%);
+    transition: all 0.5s ease;
+}
+
+.templateP2 .downtemp a:hover {
+    background-color: hsl(356, 64%, 82%);
+    font-size: 20px;
+}
+
+/*Sperator*/
+
+.sperator {
+    background-image: linear-gradient(to bottom,
+            #fffcfd 0%,
+            #ffabcf 70%,
+            #ff97c0 100%);
+    height: 25vh;
+}
+
+/*INSTA FEED*/
+
+.instaFeed {
+    background-color: #ff97c0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.instaFeed .feeds {
+    width: 81%;
+    text-align: center;
+}
+
+.instaFeed .feeds h1 {
+    font-size: 40px;
+    padding-bottom: 50px;
+}
+
+.listfeed {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: auto;
+}
+
+.feedcol1 img {
+    height: 440px;
+    width: 440px;
+}
+
+.listfeed .feedcol2 {
+    display: grid;
+    grid-template-columns: 210px 210px 210px;
+    grid-template-rows: 210px 210px 210px;
+    grid-gap: 10px;
+}
+
+.listfeed .feedcol2 img {
+    height: 210px;
+    width: 210px;
+}
+
+.sperator1 {
+    height: 25vh;
+}
+
+/*Contact me*/
+
+.contactme {
+    height: 90vh;
+    display: flex;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.793)
+}
+
+.partContact {
+    height: 100%;
+    width: 50%;
+    background-color: #401a33;
+}
+
+/*Footer*/
+.part2Footer {
+    height: 100%;
+    width: 50%;
+    background-color: #ffd6d4;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.895);
+}
+
+.holder {
+    margin: 60px;
+    display: flex;
+    flex-direction: column;
+    color: rgb(20, 20, 20);
+}
+
+.credit1,
+.credit2,
+.credit3 {
+    width: 100%;
+    display: flex;
+}
+
+.credit1 {
+    margin-top: 8vh;
+    justify-content: end;
+    margin-bottom: 8vh;
+}
+
+.credit1 a {
+    text-decoration: none;
+    color: rgb(40, 40, 40);
+    font-size: 22px;
+    font-weight: bolder;
+
+    transition: all 0.5s ease;
+}
+
+.credit1 a:hover {
+    color: white;
+}
+
+.credit2 {
+    justify-content: space-around;
+}
+
+.credit2 .contactus {
+    width: 60%;
+}
+
+.credit2 .followus {
+    width: 40%;
+}
+
+.credit2 .contactus h5 {
+    margin-top: 5px;
+}
+
+.credit2 .contactus p {
+    margin-top: 15px;
+}
+
+.credit2 .followus a {
+    color: black;
+    text-decoration: none;
+    filter: invert(100%);
+    margin-right: 10px;
+    transition: all 0.5s ease;
+}
+
+.credit2 .followus a:hover {
+    filter: none;
+}
+
+.credit2 .followus img {
+    width: 15px;
+    height: 15px;
+    color: black;
+}
+
+.credit3 {
+    margin-top: 25vh;
+}
+
+.contactmec {
+    width: 78.5%;
+    height: 80%;
+    margin: 80px 80px 0px 70px;
+    color: white;
+}
+
+.contactmec h1 {
+    margin-bottom: 40px;
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.items input {
+    height: 30px;
+}
+
+.items input,
+.items textarea {
+    margin-top: 10px;
+    background-color: transparent;
+    border: 2px solid white;
+    padding-left: 12px;
+    padding-right: 12px;
+    color: white;
+    font-size: medium;
+}
+
+.items textarea {
+    height: 70px;
+    resize: none;
+    padding-top: 5px;
+}
+
+.items button {
+    width: 35%;
+    height: 35px;
+    border: 2px solid rgba(201, 57, 158, 0.855);
+    background-color: #843267;
+    ;
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: all 0.5s ease;
+}
+
+.items button:hover {
+    background-color: rgba(201, 57, 158, 0.855);
+    border: 2px solid #ff57c49d;
+}
