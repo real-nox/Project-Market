@@ -1,0 +1,22 @@
+{
+  "name": "project-market",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backend/app.js",
+  "scripts": {
+    "test": "nodemon backend/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/real-nox/Project-Market.git"
+  },
+  "author": "Ranox",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/real-nox/Project-Market/issues"
+  },
+  "homepage": "https://github.com/real-nox/Project-Market#readme",
+  "dependencies": {
+    "ejs": "^4.0.1"
+  }
+}
