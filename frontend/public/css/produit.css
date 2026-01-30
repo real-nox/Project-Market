@@ -30,7 +30,8 @@
 }
 
 .side1 img {
-    object-fit: contain;
+    width: 90%;
+    height: 90%;
 }
 
 .side2 {

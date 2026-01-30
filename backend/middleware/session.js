@@ -1,3 +1,5 @@
+const {randomUUID} = require("crypto")
+
 function Sessions(req, res, next) {
     if (!req.cookies.sessionID) {
         const sessionId = randomUUID()

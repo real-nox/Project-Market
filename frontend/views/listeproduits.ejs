@@ -33,7 +33,7 @@
     </div>
 
     <script>
-        window.addEventListener("load", () => {
+        window.addEventListener("load", async() => {
             const container = document.getElementById("produitsl")
             container.innerHTML = ""
 
@@ -44,7 +44,7 @@
                 const resultat = await fetch("/Liste-Produits")
                 const data = await resultat.json()
 
-                if(!data.length) {
+                if (!data.length) {
                     const h1 = document.createElement("h1")
                     h1.innerHTML = "Il se peut qu'il n'y ait rien"
                     container.classList.add("not")
@@ -56,7 +56,7 @@
 
                     const card = document.createElement("div")
                     card.className = "templateP fade-in"
-                    
+
                     card.innerHTML = `
                                 <div class="toptemp">
                                     <h3>${name}</h3>
@@ -65,8 +65,8 @@
                                 <div class="backgroundtemp load">
                                     <img style="width:300px; height:300px" src="${imageurl}" alt="${name}" class="product-img">
                                 </div>
-                                <div class="downtemp">
-                                    <a href="/Produit/Buy/${id}">Buy now </a>
+                                <div class="downtemp" >
+                                    <button class="downtempbtn" data-id="${id}">Buy now </button>
                                     <a href="/Produit/${id}">Learn more</a>
                                 </div>`
 
@@ -82,7 +82,20 @@
                 })
             }
 
-            ListePorduits()
+            await ListePorduits()
+
+            console.log(document.querySelectorAll(".downtempbtn"))
+            document.querySelectorAll(".downtempbtn").forEach(button => {
+                button.addEventListener("click", (e) => {
+                    const id = e.target.dataset.id
+
+                    addCart(id, 1)
+                })
+            })
+
+            function addCart(id, qtn) {
+                //Adding logic soon
+            }
         });
     </script>
 </body>
