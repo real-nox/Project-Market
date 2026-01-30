@@ -47,16 +47,31 @@
                                             <input type="number" name="stockp" id="stockp"
                                                 placeholder="Entrer la quantité du produit" min="0" max="100000">
                                         </div>
-                                        <div class="itempr">
-                                            <input type="file" name="img_p" id="imgp" />
-                                            <label id="imgs" for="imgp">Image Produit</label>
+                                        <div class="itempr3">
+                                            <div class="">
+                                                <input type="file" name="img_p" id="img_p" />
+                                                <label id="imgs" for="img_p">Image Produit</label>
+                                            </div>
+                                            <div class="imagesshow" id="imagesshow">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="btnitempr">
                                         <button id="btncool" type="submit">Ajouter</button>
-                                        <div id="responsecard" class="responsecard">
-                                            <h4>Produit a été ajouter!</h4>
-                                            <p>Le produit est maintement ajouté, Bravo!</p>
+                                        <div id="responsecard"
+                                            class="responsecard <%= (errors || success) ? 'open' : '' %>">
+                                            <% if (errors) {%>
+                                                <h4>Erreur!</h4>
+                                                <p>
+                                                    <%= errors%>
+                                                </p>
+                                                <% } %>
+                                                    <% if (success) {%>
+                                                        <h4>Produit a été ajouter!</h4>
+                                                        <p>
+                                                            <%= success%>
+                                                        </p>
+                                                        <% } %>
                                         </div>
                                     </div>
                                 </form>
@@ -74,21 +89,21 @@
             document.getElementById("loader").classList.add("hide");
             document.getElementById("everything").classList.add("show");
 
-            document.getElementById("imgp").addEventListener("change", (e) => {
-                let fileName = e.target.files[0].name
+            document.getElementById("img_p").addEventListener("change", (e) => {
+                let file = e.target.files[0]
+                let fileName = file.name
+
+                let url = URL.createObjectURL(file)
 
                 document.getElementById("imgs").innerHTML = fileName
+                document.getElementById("imagesshow").innerHTML = `<img src="${url}" id="imgshow" alt="Preview">`
             })
 
-            const btn = document.getElementById("btncool")
+            document.getElementById("responsecard").classList.add("open")
 
-            btn.addEventListener("click", () => {
-                document.getElementById("responsecard").classList.add("open")
-
-                setTimeout(() => {
-                    document.getElementById("responsecard").classList.remove("open")
-                }, 5000);
-            })
+            setTimeout(() => {
+                document.getElementById("responsecard").classList.remove("open")
+            }, 5000);
         });
     </script>
 </body>

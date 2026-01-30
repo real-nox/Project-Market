@@ -708,12 +708,35 @@ body,
     padding: 10px 10px 10px 10px;
 }
 
-#imgp {
+.itempr3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#imgshow {
+    height: 125px;
+    width: 125px;
+    border: 2px;
+}
+
+.imagesshow {
+    height: 125px;
+    width: 125px;
+    background-color: transparent;
+    border: 2px dashed black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#img_p {
     display: none;
 }
 
 #imgs {
-    height: 100px;
+    height: 120px;
     width: 150px;
     background-color: white;
     border: 2px dashed black;

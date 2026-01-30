@@ -13,28 +13,45 @@ async function FetchROWViaNameP(nomp) {
         .from('produit_s')
         .select()
         .eq('name', nomp)
+        console.log(data)
     return { data, error }
 }
 
 async function StoreIMGBucket(file) {
-    console.log(new Date().toString().replace(/:/g, "-"))
     const fileName = `${new Date().toString().replace(/:/g, "-")}-${file.originalname}`
 
     const { error } = await supabase.storage
-    .from("produits")
-    .upload(fileName, file.buffer, { contentType: file.mimetype})
+        .from("produits")
+        .upload(fileName, fs.createReadStream(file.path), { contentType: file.mimetype })
 
     if (error) throw error
 
     const { data } = supabase.storage
-    .from("produits")
-    .getPublicUrl(fileName)
+        .from("produits")
+        .getPublicUrl(fileName)
 
+    fs.unlinkSync(file.path)
     return data.publicUrl
 }
 
 async function InsertProduct(Arg) {
-    await supabase.from("produit_s").insert(Arg)
+    let { libellep, prixp, descp, stockp, imageUrl } = Arg;
+
+    const { error } = await supabase
+        .from("produit_s")
+        .insert([
+            {
+                name: libellep,
+                description: descp,
+                price: prixp,
+                stock: stockp,
+                imageurl: imageUrl
+            }
+        ])
+
+    if (error) {
+        throw error
+    }
 }
 
 module.exports = { supabase, FetchROWViaNameP, StoreIMGBucket, InsertProduct }
