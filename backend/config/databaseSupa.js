@@ -54,4 +54,23 @@ async function InsertProduct(Arg) {
     }
 }
 
-module.exports = { supabase, FetchROWViaNameP, StoreIMGBucket, InsertProduct }
+async function ShowProducts() {
+    const {data, error} = await supabase.from("produit_s")
+    .select()
+
+    if (error) throw data
+    
+    return data
+}
+
+async function ShowSpecificProduct(id) {
+    const {data, error} = await supabase.from("produit_s")
+    .select()
+    .eq("id", id)
+
+    if (error) throw data
+    
+    return data
+}
+
+module.exports = { supabase, FetchROWViaNameP, StoreIMGBucket, InsertProduct, ShowProducts, ShowSpecificProduct }

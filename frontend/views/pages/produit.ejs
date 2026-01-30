@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cité De Soin Et Beauté - Nos Produits</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/produit.css">
+    <link rel="shortcut icon" href="/img/icon.jpg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="loader">
+        <div id="spinner"></div>
+    </div>
+
+    <div id="everything">
+        <%- include("../includes/topbar") %>
+
+            <main>
+                <div class="productsc">
+                    <div class="cetproduit">
+                        <h1><%= produit.name%></h1>
+                        <div class="centerproduit">
+                            <div class="side1">
+                                <img src="<%= produit.imageurl%>" alt="">
+                            </div>
+                            <div class="side2">
+                                <div class="top">
+                                    <h2><%= produit.name%></h2>
+                                    <h4><%= produit.price%><span> DH</span></h4>
+                                </div>
+                                <div class="center">
+                                    <p><%= produit.description%></p>
+                                </div>
+                                <div class="bottom">
+                                    <div class="amount">
+                                        <span class="rig">-</span>
+                                        <input type="number" value="1" name="counter" id="counter" class="counter" max="<%= produit.stock%>" readonly>
+                                        <span class="lef">+</span>
+                                    </div>
+                                    <div class="acht">
+                                        <button>Acheter</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <%- include("../includes/footer") %>
+    </div>
+
+    <script>
+        window.addEventListener("load", () => {
+            document.getElementById("loader").classList.add("hide");
+            document.getElementById("everything").classList.add("show");
+
+            const btnarig = document.querySelector(".rig")
+            const btnalef = document.querySelector(".lef")
+
+            let inp = document.getElementById("counter")
+
+            btnarig.addEventListener("click", (e) => {
+                let c = parseInt(inp.value)
+                console.log(c)
+                if (c === 1)
+                    return
+                inp.value = c - 1
+            })
+
+            btnalef.addEventListener("click", (e) => {
+                let c = parseInt(inp.value)
+                console.log(c)
+                if (c === 20)
+                    return
+                inp.value = c + 1
+            })
+        });
+    </script>
+</body>
+
+</html>

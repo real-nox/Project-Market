@@ -1,0 +1,95 @@
+.footerc {
+    height: 60px;
+    background-color: #ffd6d4;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.895);
+}
+
+.footerc .creditz {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.topcontainer {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    background-color: rgba(255, 174, 187, 0.063);
+}
+
+.centerpart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 90px;
+}
+
+.loginc {
+    background-color: rgba(178, 25, 117, 0.608);
+    height: 420px;
+    width: 380px;
+    border: 2px solid rgba(72, 72, 72, 0.223);
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginc .abox {
+    height: 100%;
+    width: 80%;
+    text-align: center;
+    color: white;
+    padding-top: 80px;
+}
+
+.itemlog {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 90px;
+    height: 100%;
+}
+
+.itemlog input {
+    height: 35px;
+    font-size: medium;
+    padding: 5px 10px 5px 10px;
+    border: 0;
+}
+
+.itemlog .inputt.click {
+    border: 1px solid #ffc1be;
+    outline: none;
+}
+
+button {
+    height: 40px;
+    width: 190px;
+    font-size: medium;
+
+    border: 2px solid #88004dd8;
+    background-color: #ff68bd71;
+    color: rgb(0, 0, 0);
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    transition: all 0.5s ease;
+}
+
+button:hover {
+    border: 2px solid #ff2da471;
+    background-color: #ff219fd8;
+    color: white;
+}
+
+.btnitem {
+    display: flex;
+    justify-content: center;
+}

@@ -17,102 +17,110 @@
     <div id="everything">
         <%- include("includes/topbar") %>
 
-        <main>
-            <div class="stcontainer">
-                <div class="pinktop">
-                    <div class="centering">
-                        <div class="textside">
-                            <h1>A good cake for a day</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, facilis!</p>
-                            <a href="/Produits">Nos Produits</a>
+            <main>
+                <div class="stcontainer">
+                    <div class="pinktop">
+                        <div class="centering">
+                            <div class="textside">
+                                <h1>A good cake for a day</h1>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, facilis!</p>
+                                <a href="/Produits">Nos Produits</a>
+                            </div>
+                            <div class="picside">
+                                <img src="/img/main.png" alt="Smt">
+                            </div>
                         </div>
-                        <div class="picside">
-                            <img src="/img/main.png" alt="Smt">
+                    </div>
+                    <div class="pinkdown">
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo?</p>
+                    </div>
+                </div>
+                <div class="productsc">
+                    <div class="listproduits" id="produits">
+                        <div class="sectop">
+                            <h1>Nos Produits</h1>
+                            <a href="/Produits">Tous</a>
+                        </div>
+                        <div class="produits" id="produitsl">
                         </div>
                     </div>
                 </div>
-                <div class="pinkdown">
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo?</p>
-                </div>
-            </div>
-            <div class="productsc">
-                <div class="listproduits" id="produits">
-                    <div class="sectop">
-                        <h1>Nos Produits</h1>
-                        <a href="/Produits">Tous</a>
-                    </div>
-                    <div class="produits">
-                        <div class="templateP">
-                            <div class="toptemp">
-                                <h3>Title</h3>
-                                <p>Price</p>
+                <div class="sperator"></div>
+                <div class="instaFeed">
+                    <div class="feeds">
+                        <h1>Instagram Feed</h1>
+                        <div class="listfeed">
+                            <div class="feedcol1">
+                                <img src="/img/feedm.png" alt="">
                             </div>
-                            <div class="backgroundtemp">
-                                <img src="" alt="Empty">
-                            </div>
-                            <div class="downtemp">
-                                <a href="">Buy now </a>
-                                <a href="">Learn more</a>
-                            </div>
-                        </div>
-                        <div class="templateP">
-                            <div class="toptemp">
-                                <h3>Title</h3>
-                                <p>Price</p>
-                            </div>
-                            <div class="backgroundtemp">
-                                <img src="" alt="Empty">
-                            </div>
-                            <div class="downtemp">
-                                <a href="">Buy now </a>
-                                <a href="">Learn more</a>
-                            </div>
-                        </div>
-                        <div class="templateP">
-                            <div class="toptemp">
-                                <h3>Title</h3>
-                                <p>Price</p>
-                            </div>
-                            <div class="backgroundtemp">
-                                <img src="" alt="Empty">
-                            </div>
-                            <div class="downtemp">
-                                <a href="">Buy now </a>
-                                <a href="">Learn more</a>
+                            <div class="feedcol2">
+                                <img src="/img/feed1.png" alt="">
+                                <img src="/img/feed2.png" alt="">
+                                <img src="/img/feed3.png" alt="">
+                                <img src="/img/feed4.png" alt="">
+                                <img src="/img/feed5.png" alt="">
+                                <img src="/img/feed6.png" alt="">
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="sperator"></div>
-            <div class="instaFeed">
-                <div class="feeds">
-                    <h1>Instagram Feed</h1>
-                    <div class="listfeed">
-                        <div class="feedcol1">
-                            <img src="/img/feedm.png" alt="">
-                        </div>
-                        <div class="feedcol2">
-                            <img src="/img/feed1.png" alt="">
-                            <img src="/img/feed2.png" alt="">
-                            <img src="/img/feed3.png" alt="">
-                            <img src="/img/feed4.png" alt="">
-                            <img src="/img/feed5.png" alt="">
-                            <img src="/img/feed6.png" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sperator1"></div>
-        </main>
+                <div class="sperator1"></div>
+            </main>
 
-        <%- include("includes/footer") %>
+            <%- include("includes/footer") %>
     </div>
 
     <script>
         window.addEventListener("load", () => {
+            const container = document.getElementById("produitsl")
+            container.innerHTML = ""
+
             document.getElementById("loader").classList.add("hide");
             document.getElementById("everything").classList.add("show");
+
+
+            async function ListePorduits() {
+                const resultat = await fetch("/Liste-Produits")
+                const data = await resultat.json()
+
+                console.log(!data.length)
+                if (!data.length) {
+                    return
+                }
+
+                for (let i = 0; i < 3 && i < data.length; i++) {
+                    const element = data[i]
+                    const { id, name, description, price, stock, created_at, imageurl } = element
+
+                    const card = document.createElement("div")
+                    card.className = "templateP fade-in"
+
+                    card.innerHTML = `
+        <div class="toptemp">
+            <h3>${name}</h3>
+            <p>${price} DH</p>
+        </div>
+        <div class="backgroundtemp load">
+            <img style="width:300px; height:300px" src="${imageurl}" alt="${name}" class="product-img">
+        </div>
+        <div class="downtemp">
+            <a href="/Produit/Buy/${id}">Buy now </a>
+            <a href="/Produit/${id}">Learn more</a>
+        </div>`
+
+                    container.appendChild(card)
+
+                    const background = card.querySelector(".backgroundtemp")
+                    const img = background.querySelector("img")
+
+                    img.addEventListener("load", () => {
+                        background.classList.remove("load")
+                        img.classList.add("loaded")
+                    })
+                }
+            }
+
+            ListePorduits()
         });
     </script>
 </body>

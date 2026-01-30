@@ -1,0 +1,22 @@
+<header lass="maincontainer" id="admintop">
+    <div class="topcontainer">
+        <nav class="navigation">
+            <div id="part1-nav">
+                <a href="/Ad">Cité de Soin & Beauté</a>
+            </div>
+            <div id="part2-nav">
+                <div class="sectionsnav">
+                    <a href="/Produits-ajouter">Ajout Produit</a>
+                    <a href="/Clients">Clients</a>
+                    <div class="contact">
+                        <% if(user && user.length) {%>
+                            <a href="/Ad/Logout">Logout</a>
+                            <% } else { %>
+                                <a href="/Ad/Login">Login</a>
+                                <% } %>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>

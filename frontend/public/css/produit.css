@@ -1,0 +1,141 @@
+.productsc {
+    min-height: 79vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 115px 65px 115px;
+}
+
+.cetproduit {
+    max-width: 850px;
+    width: 100%;
+}
+
+.centerproduit {
+    width: 100%;
+    height: 80%;
+    display: flex;
+}
+
+.side1 {
+    border: 1.5px solid rgba(0, 0, 0, 0.2);
+    background-color: rgb(244, 244, 244);
+    border-radius: 15px;
+    width: 50%;
+    margin-right: 35px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.145);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.side1 img {
+    object-fit: contain;
+}
+
+.side2 {
+    width: 50%;
+    padding-top: 35px;
+}
+
+.side2 p {
+    font-size: medium;
+    color: rgb(147, 147, 147);
+}
+
+.side2 .top {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    gap: 25px;
+    padding-bottom: 40px;
+}
+
+.side2 .center {
+    padding-bottom: 40px;
+}
+
+.side2 .bottom {
+    padding-top: 25px;
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.amount {
+    width: 90px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.amount input {
+    width: 30px;
+    height: 30px;
+
+    padding: 0;
+    box-sizing: border-box;
+
+    font-size: 14px;
+    line-height: 30px;
+
+    text-align: center;
+
+    border: 1px solid #f1f1f1;
+    background-color: #fff;
+
+    outline: none;
+    appearance: none;
+}
+
+.amount span {
+    width: 30px;
+    display: block;
+    text-align: center;
+    font-size: 25px;
+    background-color: rgb(244, 244, 244);
+    cursor: pointer;
+    transition: all 0.5s ease;
+    user-select: none;
+}
+
+.amount span:hover {
+    background-color: rgb(224, 224, 224);
+}
+
+.rig {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.lef {
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.acht {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.acht button {
+    background-color: rgb(255, 114, 154);
+    border: 2px solid rgb(183, 33, 86);
+    color: white;
+    width: 100px;
+    height: 30px;
+    border-radius: 15px;
+    font-size: medium;
+    transition: color 0.5s ease, background-color 0.6s ease, border 0.6s ease;
+
+    cursor: pointer;
+}
+
+.acht button:hover {
+        background-color: rgb(183, 33, 86);
+    border: 2px solid rgb(255, 114, 154);
+    color: rgb(33, 33, 33);
+}

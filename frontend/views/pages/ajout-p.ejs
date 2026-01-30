@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cité De Soin Et Beauté - Nos Produits</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="shortcut icon" href="/img/icon.jpg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="loader">
+        <div id="spinner"></div>
+    </div>
+
+    <div id="everything">
+        <%- include("../includes/adtopbar") %>
+        <main>
+            <div class="centerpart">
+                <div class="boxc">
+                    <div class="box">
+                        <h2>Ajout Des Produits</h2>
+                        <div class="formp">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                <div class="grid">
+                                    <div class="itempr">
+                                        <div class="itempr1">
+                                            <label>Libellé Produit</label>
+                                            <input type="text" name="libellep" id="libellep"
+                                                placeholder="Entrer le libellé du produit">
+                                        </div>
+                                        <div class="itempr2">
+                                            <label>Prix Produit</label>
+                                            <input type="number" name="prixp" id="prixp"
+                                                placeholder="Entrer le prix du produit" min="0" max="100000">
+                                        </div>
+                                    </div>
+                                    <div class="itempr">
+                                        <label>Description Produit</label>
+                                        <textarea placeholder="Entrer la description du produit" name="descp"
+                                            id="descp"></textarea>
+                                    </div>
+                                    <div class="itempr">
+                                        <label>Stock Produit</label>
+                                        <input type="number" name="stockp" id="stockp"
+                                            placeholder="Entrer la quantité du produit" min="0" max="100000">
+                                    </div>
+                                    <div class="itempr3">
+                                        <div class="">
+                                            <input type="file" name="img_p" id="img_p" />
+                                            <label id="imgs" for="img_p">Image Produit</label>
+                                        </div>
+                                        <div class="imagesshow" id="imagesshow">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btnitempr">
+                                    <button id="btncool" type="submit">Ajouter</button>
+                                    <div id="responsecard"
+                                        class="responsecard <%= (errors && errors.length) ? 'open err' : '' || (success && success.length) ? 'open success' : '' %>">
+                                        <% if (errors && errors.length) { %>
+                                            <h4>Erreur!</h4>
+                                            <ul>
+                                                <% errors.forEach(err=> { %>
+                                                    <li>
+                                                        <%= err %>
+                                                    </li>
+                                                    <% }) %>
+                                            </ul>
+                                            <% } %>
+
+                                                <% if (success && success.length) { %>
+                                                    <h4>Produit a été ajouté!</h4>
+                                                    <ul>
+                                                        <% success.forEach(msg=> { %>
+                                                            <li>
+                                                                <%= msg %>
+                                                            </li>
+                                                            <% }) %>
+                                                    </ul>
+                                                    <% } %>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include("includes/adfooter") %>
+    </div>
+
+    <script>
+        window.addEventListener("load", () => {
+            document.getElementById("loader").classList.add("hide");
+            document.getElementById("everything").classList.add("show");
+
+            document.getElementById("img_p").addEventListener("change", (e) => {
+                let file = e.target.files[0]
+                let fileName = file.name
+
+                let url = URL.createObjectURL(file)
+
+                document.getElementById("imgs").innerHTML = fileName
+                document.getElementById("imagesshow").innerHTML = `<img src="${url}" id="imgshow" alt="Preview">`
+            })
+
+            document.getElementById("responsecard").classList.add("open")
+
+            setTimeout(() => {
+                document.getElementById("responsecard").classList.remove("open")
+            }, 5000);
+        });
+    </script>
+</body>
+
+</html>

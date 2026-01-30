@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cité De Soin Et Beauté - Nos Produits</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="shortcut icon" href="/img/icon.jpg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="loader">
+        <div id="spinner"></div>
+    </div>
+
+    <div id="everything">
+        <%- include("includes/adtopbar") %>
+            <main>
+                <div class="centerpart">
+                    <div class="loginc">
+                        <div class="abox">
+                            <form action="/Login" method="post">
+                                <h2>Connection</h2>
+                                <div class="itemlog">
+                                    <input class="inputt" type="text" name="nom" id="nom" placeholder="Email">
+                                </div>
+                                <div class="itemlog">
+                                    <input class="inputt" type="password" name="password" id="password"
+                                        placeholder="Mot de passe">
+                                </div>
+                                <div class="itemlog">
+                                    <div class="btnitem">
+                                        <button type="submit">Se Connecter</button>
+                                    </div>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+
+            <%- include("includes/adfooter") %>
+    </div>
+
+    <script>
+        window.addEventListener("load", () => {
+            document.getElementById("loader").classList.add("hide");
+            document.getElementById("everything").classList.add("show");
+            document.querySelectorAll(".inputt").forEach(element => {
+                element.classList.add("click")
+            });
+        });
+    </script>
+</body>
+
+</html>
