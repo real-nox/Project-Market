@@ -84,7 +84,7 @@
                 const resultat = await fetch("/Liste-Produits")
                 const data = await resultat.json()
 
-                console.log(!data.length)
+                console.log(data)
                 if (!data.length) {
                     return
                 }
@@ -107,6 +107,7 @@
                                 <div class="downtemp">
                                     <button class="downtempbtn" href="Produit/Buy/${id}" onclick="addtoCart">Buy now </button>
                                     <a href="/Produit/${id}">Learn more</a>
+                                    <div id="responsecard" class="responsecard">
                                 </div>`
 
                     container.appendChild(card)

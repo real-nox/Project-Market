@@ -1,7 +1,7 @@
 const { FetchROWViaNameP, StoreIMGBucket, InsertProduct } = require("../config/databaseSupa")
 const express = require("express")
 const { upload } = require("../middleware/upload")
-const Sessions = require("../middleware/session")
+const Sessions = require("../middleware/session-cart")
 
 const AdminR = express.Router()
 
@@ -36,8 +36,8 @@ AdminR.get("/Ad/Me", (req, res) => {
     /*if (!req.user)
         return res.redirect("/Ad/Login")
     else {*/
-        const user = req.user
-        res.render("", { user })
+    const user = req.user
+    res.render("", { user })
     //}
 
 })
@@ -54,14 +54,14 @@ AdminR.post("/Produits-ajouter", upload.single("img_p"), async (req, res) => {
 
         if (!libellep || !prixp || !descp || !stockp) {
             errors = ["Completez les informations!"]
-            return res.render("ajout-p", { errors })
+            return res.render("pages/ajout-p", { errors })
         }
 
         const { data, error } = await FetchROWViaNameP(libellep)
 
         if (data.length) {
             errors = ["Il existe un produit comme celui ci!"]
-            return res.render("ajout-p", { errors })
+            return res.render("pages/ajout-p", { errors })
         }
 
         let imageUrl
@@ -75,7 +75,7 @@ AdminR.post("/Produits-ajouter", upload.single("img_p"), async (req, res) => {
         await InsertProduct(propriety)
 
         success = ["Le produit est maintement ajouté, Bravo!"]
-        return res.render("ajout-p", { success })
+        return res.render("pages/ajout-p", { success })
     } catch (err) {
         console.log(err)
     }

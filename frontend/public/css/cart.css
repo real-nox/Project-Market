@@ -1,0 +1,115 @@
+.cartc {
+    background-color: rgb(255, 255, 255);
+    height: 450px;
+    width: 400px;
+    z-index: 999;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(255, 97, 168, 0.314);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart {
+    width: 95%;
+    height: 95%;
+}
+
+.cart .topcart {
+    background-color: rgb(245, 245, 245);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 12%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.cart .topcart .part1h4 {
+    width: 120px;
+}
+
+.cart .topcart .part2h4 {
+    display: flex;
+    justify-content: space-around;
+    width: 150px;
+}
+
+.cart .centercart {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.template {
+    background-color: rgb(192, 192, 192);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.template .part1h4 {
+    width: 25%;
+    text-align: start;
+}
+
+.template img {
+    height: 25px;
+    width: 25px;
+}
+
+.template .part1h4,
+.template .part2h4 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.template .part2h4 {
+    width: 30%;
+    gap: 30px;
+}
+
+.template .part2h4 input {
+    width: 20px;
+    text-align: center;
+}
+
+.cartc.closed {
+    z-index: -1;
+    opacity: 0;
+}
+
+.buttonconfirm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonconfirm button {
+    border: 2px solid rgb(215, 62, 177);
+    background-color: rgb(252, 45, 162);
+    border-radius: 25px;
+    font-size: medium;
+    color: white;
+    width: 90px;
+    height: 35px;
+
+    cursor: pointer;
+
+    transition: background-color 0.6s ease, border-color 0.6s ease;
+}
+
+.buttonconfirm button:hover {
+    border-color: rgb(14, 134, 18);
+    background-color: rgb(18, 121, 30);
+}
