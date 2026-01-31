@@ -1,11 +1,228 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cité De Soin Et Beauté - Nos Produits</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/confirmation.css">
+    <link rel="shortcut icon" href="/img/icon.jpg" type="image/x-icon">
 </head>
+
 <body>
-    
+    <div id="loader">
+        <div id="spinner"></div>
+    </div>
+
+    <div id="everything">
+        <%- include("../includes/topbar") %>
+
+            <main>
+                <div class="centering">
+                    <div class="containerform">
+                        <div class="part1cart">
+                            
+                        </div>
+                        <div class="part2info">
+                            <form action="/Produit/Achat/Confirmation" method="post">
+                                <div class="errorpart">
+                                    <% if(error) {%>
+                                       <p><%= error %> </p>
+                                        <% } %>
+                                </div>
+                                <div class="topform">
+                                    <div class="partone">
+                                        <input type="text" name="nom" id="nom" placeholder="Nom">
+                                    </div>
+                                    <div class="parttwo">
+                                        <input type="text" name="prenom" id="prenom" placeholder="Prénom">
+                                    </div>
+                                </div>
+                                <div class="centerform">
+                                    <div class="partone">
+                                        <input type="text" name="numt" id="nomt" placeholder="Numéro de téléphone">
+                                    </div>
+                                    <div class="parttwo">
+                                        <select name="ville" id="ville">
+                                            <option>Casablanca</option>
+                                            <option>Fès</option>
+                                            <option>Marrakech</option>
+                                            <option>Tangier</option>
+                                            <option>Salé</option>
+                                            <option>Rabat</option>
+                                            <option>Meknès</option>
+                                            <option>Oujda</option>
+                                            <option>Kénitra</option>
+                                            <option>Agadir</option>
+                                            <option>Tétouan</option>
+                                            <option>Taourirt</option>
+                                            <option>Temara</option>
+                                            <option>Safi</option>
+                                            <option>Khénifra</option>
+                                            <option selected>El Jadida</option>
+                                            <option>Laayoune</option>
+                                            <option>Mohammedia</option>
+                                            <option>Khouribga</option>
+                                            <option>Béni Mellal</option>
+                                            <option>Ait Melloul</option>
+                                            <option>Nador</option>
+                                            <option>Taza</option>
+                                            <option>Settat</option>
+                                            <option>Barréchid</option>
+                                            <option>Khemisset</option>
+                                            <option>Inezgane</option>
+                                            <option>Ksar El Kebir</option>
+                                            <option>My Drarga</option>
+                                            <option>Larache</option>
+                                            <option>Guelmim</option>
+                                            <option>Berkane</option>
+                                            <option>Dakhla</option>
+                                            <option>Bouskoura</option>
+                                            <option>El Fquih Ben Salah</option>
+                                            <option>Oued Zem</option>
+                                            <option>Sidi Slimane</option>
+                                            <option>Errachidia</option>
+                                            <option>Guercif</option>
+                                            <option>Oulad Teïma</option>
+                                            <option>Ben Guerir</option>
+                                            <option>Sefrou</option>
+                                            <option>Fnideq</option>
+                                            <option>Sidi Kacem</option>
+                                            <option>Tiznit</option>
+                                            <option>Moulay Abdallah</option>
+                                            <option>Youssoufia</option>
+                                            <option>Martil</option>
+                                            <option>Aïn Harrouda</option>
+                                            <option>Souq Sebt Oulad Nemma</option>
+                                            <option>Skhirate</option>
+                                            <option>Ouezzane</option>
+                                            <option>Sidi Yahya Zaer</option>
+                                            <option>Al Hoceima</option>
+                                            <option>M'diq</option>
+                                            <option>Midelt</option>
+                                            <option>Azrou</option>
+                                            <option>El Kelaa des Srarhna</option>
+                                            <option>Ain El Aouda</option>
+                                            <option>Beni Yakhlef</option>
+                                            <option>Ad Darwa</option>
+                                            <option>Al Aaroui</option>
+                                            <option>Qasbat Tadla</option>
+                                            <option>Boujad</option>
+                                            <option>Jerada</option>
+                                            <option>Mrirt</option>
+                                            <option>El Aïoun</option>
+                                            <option>Azemmour</option>
+                                            <option>Temsia</option>
+                                            <option>Zagora</option>
+                                            <option>Ait Ourir</option>
+                                            <option>Azilal</option>
+                                            <option>Sidi Yahia El Gharb</option>
+                                            <option>Biougra</option>
+                                            <option>Zaïo</option>
+                                            <option>Aguelmous</option>
+                                            <option>El Hajeb</option>
+                                            <option>Zeghanghane</option>
+                                            <option>Imzouren</option>
+                                            <option>Tit Mellil</option>
+                                            <option>Mechra Bel Ksiri</option>
+                                            <option>Al Attawia</option>
+                                            <option>Demnat</option>
+                                            <option>Arfoud</option>
+                                            <option>Tameslouht</option>
+                                            <option>Bou Arfa</option>
+                                            <option>Sidi Smaïl</option>
+                                            <option>Souk et Tnine Jorf el Mellah</option>
+                                            <option>Mehdya</option>
+                                            <option>Ain Taoujdate</option>
+                                            <option>Chichaoua</option>
+                                            <option>Tahla</option>
+                                            <option>Oulad Yaïch</option>
+                                            <option>Moulay Bousselham</option>
+                                            <option>Iheddadene</option>
+                                            <option>Missour</option>
+                                            <option>Zawyat ech Cheikh</option>
+                                            <option>Bouknadel</option>
+                                            <option>Oulad Tayeb</option>
+                                            <option>Oulad Barhil</option>
+                                            <option>Bir Jdid</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="bottomform">
+                                    <div class="partone">
+                                        <input type="text" name="adresse" id="adresse" placeholder="Adresse">
+                                    </div>
+                                </div>
+                                <div class="theconfirmationbtn">
+                                    <button type="submit">Confirmer</button>
+                                </div>
+                                <div class="infosection">
+                                    <p>Si vous avez déjà commander un produit, veuillez entrer que votre nom et prenom</p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <%- include("../includes/footer") %>
+    </div>
+
+    <script>
+        window.addEventListener("load", () => {
+            document.getElementById("loader").classList.add("hide");
+            document.getElementById("everything").classList.add("show");
+
+            function ProduitSession() {
+                const produitlist = sessionStorage.getItem("produits")
+                const prod = JSON.parse(produitlist)
+                if (prod)
+                    return prod.data
+                else
+                    document.location.href = "/Produits"
+            }
+
+            function CartCookie() {
+                const value = `; ${document.cookie}`
+                let cartCookie = value.split(`; cart=`)
+                if (cartCookie.length === 2)
+                    cartCookie = cartCookie.pop().split(';').shift()
+
+                return JSON.parse(decodeURIComponent(cartCookie))
+            }
+
+
+            function onCart() {
+                const prod = ProduitSession()
+                const cartvals = CartCookie()
+
+                const cartdiv = document.querySelector(".cartc")
+
+                let centercart = document.querySelector(".part1cart")
+                centercart.innerHTML = ""
+
+                let divadd = ""
+                cartvals.map(element => {
+                    const product = prod.find(p => p.id === element.id)
+                    divadd += `<div class="template">
+                            <div class="part1h4">
+                                <img src="${product.imageurl}" alt="">
+                                <p>${product.name}</p>
+                            </div>
+                            <div class="part2h4">
+                                <input type="text" name="" id="" value="${element.qte}" readonly>
+                                <p>${element.qte * product.price}DH</p>
+                                <button type="reset">x</button>
+                            </div>
+                        </div>`
+                });
+
+                centercart.innerHTML = '<div class="toppart"><h4>Votre Panier</h4></div>' + divadd
+            }
+
+            onCart()
+        });    </script>
 </body>
+
 </html>

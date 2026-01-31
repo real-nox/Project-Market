@@ -13,7 +13,7 @@ async function FetchROWViaNameP(nomp) {
         .from('produit_s')
         .select()
         .eq('name', nomp)
-        console.log(data)
+    console.log(data)
     return { data, error }
 }
 
@@ -55,22 +55,57 @@ async function InsertProduct(Arg) {
 }
 
 async function ShowProducts() {
-    const {data, error} = await supabase.from("produit_s")
-    .select()
+    const { data, error } = await supabase.from("produit_s")
+        .select()
 
     if (error) throw data
-    
+
     return data
 }
 
 async function ShowSpecificProduct(id) {
-    const {data, error} = await supabase.from("produit_s")
-    .select()
-    .eq("id", id)
+    const { data, error } = await supabase.from("produit_s")
+        .select()
+        .eq("id", id)
 
     if (error) throw data
-    
+
     return data
 }
 
-module.exports = { supabase, FetchROWViaNameP, StoreIMGBucket, InsertProduct, ShowProducts, ShowSpecificProduct }
+async function FindCli(nom, prenom) {
+    const { data, error } = await supabase.from("a_client")
+        .select()
+        .eq("nom", nom, "prenom", prenom)
+
+    if (error) throw data
+
+    return data
+}
+
+async function ClientAdd(client) {
+    const { nom, prenom, numt, ville, adresse } = client
+    const { data, error } = await supabase.from("a_client")
+        .insert({ nom: nom, prenom: prenom, numtel: numt, adresse: adresse, ville: ville })
+        .select()
+
+    if (error) throw data
+
+    return data
+}
+
+async function Order(id, id_client, qte) {
+    try {
+        const { data, error } = await supabase.from("order")
+            .insert({ id_client: id_client, id_produit: id, qte: qte })
+            .select()
+
+        if (error) throw data
+
+        return data
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+module.exports = { supabase, FetchROWViaNameP, StoreIMGBucket, InsertProduct, ShowProducts, ShowSpecificProduct, FindCli, ClientAdd, Order }

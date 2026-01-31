@@ -1,7 +1,10 @@
 function ProduitSession() {
     const produitlist = sessionStorage.getItem("produits")
-    const prod = JSON.parse(produitlist).data
-    return prod
+    const prod = JSON.parse(produitlist)
+    if (prod)
+        return prod.data
+    else
+        document.location.href = "/Produits"
 }
 
 function CartCookie() {
@@ -53,13 +56,13 @@ document.getElementById("confirmCart").addEventListener("click", async (e) => {
         console.log("hereeee")
         const resultat = await fetch("/Produit/Achat-Confirmation", {
             method: "POST",
-            headers: {"Content-Type": "application/json"}
+            headers: { "Content-Type": "application/json" }
         })
 
         console.log(resultat)
         if (!resultat.ok) console.log("Problème est survenue")
 
-        //window.location.href = "/Produit/Achat-Confirmation"
+        window.location.href = "/Produit/Achat/Confirmation"
     } catch (err) {
         console.log(err)
     }

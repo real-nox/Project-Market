@@ -1,0 +1,52 @@
+.centering {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.containerform {
+    height: 75%;
+    width: 75%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.314);
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.part1cart {
+    background-color: white;
+    height: 100%;
+    width: 70%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.part2info {
+    background-color: wheat;
+    height: 100%;
+    width: 120%;
+}
+
+.template {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.template .part1h4 {
+    display: flex;
+    justify-content: space-around;
+}
+
+.template .part1h4 img {
+    height: 50px;
+    width: 50px;
+}
+
+.template .part2h4 {
+        display: flex;
+    justify-content: space-around;
+}

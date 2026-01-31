@@ -1,5 +1,5 @@
 const express = require("express")
-const { ShowProducts, ShowSpecificProduct } = require("../config/databaseSupa")
+const { ShowProducts, ShowSpecificProduct, FindCli, ClientAdd, Order } = require("../config/databaseSupa")
 const Sessions = require("../middleware/session-cart")
 const jwt = require("jsonwebtoken")
 
@@ -12,6 +12,8 @@ produitR.use(Sessions)
 
 produitR.use((req, res, next) => {
     res.locals.produit = req.produit || []
+
+    res.locals.error = req.error || []
     next()
 })
 
@@ -78,13 +80,74 @@ produitR.post("/Produit/Achat-Confirmation", (req, res) => {
         return res.status(400).json({ error: "Erreur" })
     }
 
-    res.json({ success : true})
+    res.json({ success: true })
 })
 
-/*produitR.get("/Produit/Achat", (req, res) => {
-    console.log("here")
-    console.log(req.cookies.cart)
-    //const cartlist = JSON.parse(req.cookies.cart)
+produitR.get("/Produit/Achat/Confirmation", (req, res) => {
+    if (!req.cookies.cart) {
+        console.log("here")
+        return res.status(400).json({ error: "Erreur" })
+    }
+
+    const cartlist = JSON.parse(req.cookies.cart)
+
     res.render("pages/confirmation", { cartlist })
-})*/
+})
+
+//Confirmation
+
+produitR.post("/Produit/Achat/Confirmation", async (req, res) => {
+    try {
+        let { nom, prenom, numt, ville, adresse } = req.body
+        let error = []
+
+        if (!nom || !prenom || typeof (nom) != "string" || typeof (prenom) != "string") {
+            error = ["Completez vos information!"]
+            res.render("pages/confirmation", { error })
+        }
+
+        nom = nom.toLowerCase()
+        prenom = prenom.toLowerCase()
+
+        const cartlist = JSON.parse(req.cookies.cart)
+
+        if (!cartlist) {
+            console.log("here")
+            return res.status(400).json({ error: "Erreur" })
+        }
+
+        const isClient = await FindCli(nom, prenom)
+
+        if (isClient.length) {
+            console.log(isClient)
+            const clientID = isClient[0].id
+
+            cartlist.forEach(async produit => {
+                await Order(produit.id, clientID, produit.qte)
+            })
+
+            res.clearCookie("cart")
+            return res.redirect("/")
+        } else {
+            if (!numt || !ville || !adresse) {
+                error = ["Completez vos information!"]
+                res.render("pages/confirmation", { error })
+            }
+
+            const infoC = { nom, prenom, numt, ville, adresse }
+            const newClient = await ClientAdd(infoC)
+            const newclientID = newClient[0].id
+
+            console.log(newClient)
+            cartlist.forEach(async produit => {
+                await Order(produit.id, newclientID, produit.qte)
+            })
+
+            res.clearCookie("cart")
+            return res.redirect("/")
+        }
+    } catch (err) {
+        console.log(err)
+    }
+})
 module.exports = { produitR }
