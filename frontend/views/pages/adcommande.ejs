@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cité De Soin Et Beauté</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="shortcut icon" href="/img/icon.jpg" type="image/x-icon">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+    <div id="loader">
+        <div id="spinner"></div>
+    </div>
+
+    <div id="everything">
+        <%- include("../includes/adtopbar") %>
+            <main>
+                <div class="center">
+                    <div class="liste" style="width: 80%;">
+                        <div class="top">
+                            <div class="title">
+                                <h2>Commandes</h2>
+                            </div>
+                            <div class="addbtn">
+                            </div>
+                        </div>
+                        <div class="centering">
+                            <div class="scrollablet">
+
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>DATE CREATION</th>
+                                            <th>NOM COMPLET</th>
+                                            <th>PRIX TOTAL</th>
+                                            <th>STATUS</th>
+                                            <th>PRODUITS</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody" class="tbody">
+                                    </tbody>
+                                </table>
+                                <div class="loadingcontent" id="loadingcontent">
+                                    <h1 id="loadingcontenth1">Loading...</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <%- include("../includes/adfooter") %>
+    </div>
+    <script src="/js/commandes.js"></script>
+</body>
+
+</html>

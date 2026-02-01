@@ -21,31 +21,32 @@
             <div class="centerpart">
                 <div class="boxc">
                     <div class="box">
-                        <h2>Ajout Le Produit</h2>
+                        <h2>Edité Le Produit</h2>
                         <div class="formp">
-                            <form action="/Ad/Produits/Produit-ajouter" method="post" enctype="multipart/form-data">
+                            <form action="/Ad/Produits/Produit-edit" method="post" enctype="multipart/form-data">
                                 <div class="grid">
                                     <div class="itempr">
                                         <div class="itempr1">
                                             <label>Libellé Produit</label>
+                                            <input type="text" name="id" id="id" style="display: none;" value="<%= produitinfo.id %>" >
                                             <input type="text" name="libellep" id="libellep"
-                                                placeholder="Entrer le libellé du produit">
+                                                placeholder="Entrer le libellé du produit" value="<%= produitinfo.name %>">
                                         </div>
                                         <div class="itempr2">
                                             <label>Prix Produit</label>
                                             <input type="number" name="prixp" id="prixp"
-                                                placeholder="Entrer le prix du produit" min="0" max="100000">
+                                                placeholder="Entrer le prix du produit" min="0" max="100000" value="<%= produitinfo.price %>">
                                         </div>
                                     </div>
                                     <div class="itempr">
                                         <label>Description Produit</label>
                                         <textarea placeholder="Entrer la description du produit" name="descp"
-                                            id="descp"></textarea>
+                                            id="descp"><%= produitinfo.description %></textarea>
                                     </div>
                                     <div class="itempr">
                                         <label>Stock Produit</label>
                                         <input type="number" name="stockp" id="stockp"
-                                            placeholder="Entrer la quantité du produit" min="0" max="100000">
+                                            placeholder="Entrer la quantité du produit" min="0" max="100000" value="<%= produitinfo.stock %>">
                                     </div>
                                     <div class="itempr3">
                                         <div class="">
@@ -53,6 +54,8 @@
                                             <label id="imgs" for="img_p">Image Produit</label>
                                         </div>
                                         <div class="imagesshow" id="imagesshow">
+                                            <input type="text" name="imageurl" id="imageurl" style="display: none;" value="<%= produitinfo.imageurl %>" >
+                                            <img src="<%= produitinfo.imageurl %>" id="imgshow" alt="Preview">
                                         </div>
                                     </div>
                                 </div>
@@ -97,16 +100,6 @@
         window.addEventListener("load", () => {
             document.getElementById("loader").classList.add("hide");
             document.getElementById("everything").classList.add("show");
-
-            document.getElementById("img_p").addEventListener("change", (e) => {
-                let file = e.target.files[0]
-                let fileName = file.name
-
-                let url = URL.createObjectURL(file)
-
-                document.getElementById("imgs").innerHTML = fileName
-                document.getElementById("imagesshow").innerHTML = `<img src="${url}" id="imgshow" alt="Preview">`
-            })
 
             document.getElementById("responsecard").classList.add("open")
 

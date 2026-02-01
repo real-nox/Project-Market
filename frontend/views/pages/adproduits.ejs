@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="shortcut icon" href="/img/icon.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=more_horiz" />
 </head>
 
 <body>
@@ -83,7 +84,7 @@
 
             async function LoadProduits() {
                 Loading()
-                const reslutat = await fetch("/api/Liste-Produits").then((res) => res.json())
+                const reslutat = await fetch("/api/ad/Liste-Produits").then((res) => res.json())
                     .then(data => {
                         stopLoading()
 
@@ -102,9 +103,9 @@
                             let smt = `<tr>
                                             <td class="nomproduit"><img src="${Data.imageurl}" alt="smt"><span>${Data.name}</span></td>
                                             <td>${Data.price}DH</td>
-                                            <td>online</td>
+                                            <td>${Data.status}</td>
                                             <td>${formatedDate}</td>
-                                            <td><a class="options" href="/Produit/Edit/${Data.id}">...</a></td>
+                                            <td><a class="options" href="/Produit/Edit/${Data.id}"><span class="material-symbols-outlined">more_horiz</span></a></td>
                                         </tr>`
 
                             document.querySelector("tbody").innerHTML += smt

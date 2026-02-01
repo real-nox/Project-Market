@@ -13,7 +13,18 @@ async function FetchROWViaNameP(nomp) {
         .from('produit_s')
         .select()
         .eq('name', nomp)
-    console.log(data)
+
+    if (error) throw error
+    return { data, error }
+}
+
+async function FetchROWViaIDP(id) {
+    const { data, error } = await supabase
+        .from('produit_s')
+        .select()
+        .eq('id', id)
+
+    if (error) throw error
     return { data, error }
 }
 
@@ -55,6 +66,16 @@ async function InsertProduct(Arg) {
 }
 
 async function ShowProducts() {
+    const { data, error } = await supabase.from("produit_s")
+        .select()
+        .eq("status", 'active')
+
+    if (error) throw error
+
+    return data
+}
+
+async function ShowAdProducts() {
     const { data, error } = await supabase.from("produit_s")
         .select()
 
@@ -105,13 +126,37 @@ async function Order(id, id_client, qte) {
 
         return data
     } catch (err) {
-        console.log(err)
+        console.error(err)
+    }
+}
+
+async function ListeOrder() {
+    try {
+        const { data, error } = await supabase.from("order")
+            .select()
+            .order("created_at", { ascending: false })
+
+        if (error) throw error
+
+        return data
+    } catch (err) {
+        console.error(err)
     }
 }
 
 async function ShowClients() {
     const { data, error } = await supabase.from("a_client")
         .select()
+
+    if (error) throw error
+
+    return data
+}
+
+async function ShowSpecificClient(id) {
+    const { data, error } = await supabase.from("a_client")
+        .select("nom, prenom")
+        .eq("id", id)
 
     if (error) throw error
 
@@ -125,9 +170,9 @@ async function ShowOrderViaClient(id) {
 
     if (error) throw error
 
-    const resultat = Object.values(data.reduce((acc, {id_produit, qte}) => {
+    const resultat = Object.values(data.reduce((acc, { id_produit, qte }) => {
         if (!acc[id_produit]) {
-            acc[id_produit] = { id_produit, qte: 0}
+            acc[id_produit] = { id_produit, qte: 0 }
         }
         acc[id_produit].qte += qte
         return acc
@@ -136,4 +181,49 @@ async function ShowOrderViaClient(id) {
     return resultat
 }
 
-module.exports = { supabase, FetchROWViaNameP, StoreIMGBucket, InsertProduct, ShowProducts, ShowSpecificProduct, FindCli, ClientAdd, Order, ShowClients, ShowOrderViaClient }
+async function UpdateOrder(id, status) {
+    try {
+        const { data, error } = await supabase.from("order")
+            .update({ status: status })
+            .eq("id_order", id)
+
+        if (error) throw error
+
+        return data
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+async function UpdateProduct(Arg, id) {
+    let { libellep, prixp, descp, stockp, imageUrl } = Arg;
+
+    const { data, error } = await supabase
+        .from("produit_s")
+        .update(
+            { name: libellep, description: descp, price: prixp, stock: stockp, imageurl: imageUrl })
+            .eq("id", id)
+
+    if (error) throw error
+    return data
+}
+
+module.exports = {
+    supabase,
+    FetchROWViaNameP,
+    FetchROWViaIDP,
+    StoreIMGBucket,
+    InsertProduct,
+    ShowProducts,
+    ShowAdProducts,
+    ShowSpecificProduct,
+    FindCli,
+    ClientAdd,
+    ListeOrder,
+    Order,
+    ShowClients,
+    ShowOrderViaClient,
+    ShowSpecificClient,
+    UpdateOrder,
+    UpdateProduct
+}

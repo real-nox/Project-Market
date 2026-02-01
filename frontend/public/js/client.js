@@ -1,4 +1,3 @@
-
 window.addEventListener("load", async () => {
 
     document.getElementById("loader").classList.add("hide");
