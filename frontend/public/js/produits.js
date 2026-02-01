@@ -55,7 +55,7 @@ window.addEventListener("load", async () => {
             sessionStorage.removeItem("produits")
         }
     } else {
-        const resultat = await fetch("/Liste-Produits")
+        const resultat = await fetch("/api/Liste-Produits")
         const data = await resultat.json()
 
         if (!data.length) {

@@ -7,6 +7,7 @@ const app = express()
 
 const { AdminR } = require("./routes/admin")
 const { produitR } = require("./routes/produits")
+const { api } = require("./routes/api")
 const Sessions = require("./middleware/session-cart")
 
 app.set("views", path.join(__dirname, "../frontend/views"))
@@ -23,6 +24,7 @@ app.use(Sessions)
 //Router
 app.use(AdminR)
 app.use(produitR)
+app.use(api)
 
 app.get("/", (req, res) => {
     res.render("main")

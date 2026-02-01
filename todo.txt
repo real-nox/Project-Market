@@ -1,0 +1,2 @@
+- Fix problem with database : Done
+- Show list clients

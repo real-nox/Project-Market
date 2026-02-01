@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cité De Soin Et Beauté</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="shortcut icon" href="/img/icon.jpg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="loader">
+        <div id="spinner"></div>
+    </div>
+
+    <div id="everything">
+        <%- include("../includes/adtopbar") %>
+            <main>
+                <div class="center">
+                    <div class="liste">
+                        <div class="top">
+                            <div class="title">
+                                <h2>Produits</h2>
+                            </div>
+                            <div class="addbtn">
+                                <a href="/Ad/Produits/Produit-ajouter">Ajouter</a>
+                            </div>
+                        </div>
+                        <div class="centering">
+                            <div class="scrollablet">
+
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>PRODUITS</th>
+                                            <th>PRIX</th>
+                                            <th>STATUS</th>
+                                            <th>DATE CREATION</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody" class="tbody">
+                                    </tbody>
+                                </table>
+                                <div class="loadingcontent" id="loadingcontent">
+                                    <h1 id="loadingcontenth1">Loading...</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <%- include("../includes/adfooter") %>
+    </div>
+
+    <script>
+        window.addEventListener("load", async () => {
+
+            document.getElementById("loader").classList.add("hide");
+            document.getElementById("everything").classList.add("show");
+
+            let loadingc
+            let container = document.getElementById("loadingcontent")
+            let text = document.getElementById("loadingcontenth1")
+
+            function Loading() {
+                let dots = 0
+
+                loadingc = setInterval(() => {
+                    dots = (dots + 1) % 4
+                    text.textContent = "Loading" + ".".repeat(dots)
+                }, 500);
+            }
+
+            function stopLoading() {
+                clearInterval(loadingc);
+                text.style.display = "none"
+                container.style.display = "none"
+            }
+
+            async function LoadProduits() {
+                Loading()
+                const reslutat = await fetch("/api/Liste-Produits").then((res) => res.json())
+                    .then(data => {
+                        stopLoading()
+
+                        for (let i = 0; i < data.length; i++) {
+                            console.log(data[i])
+
+                            let Data = data[i]
+                            const formatedDate = new Intl.DateTimeFormat("en-US", {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                                hour: "numeric",
+                                minute: "2-digit",
+                                hour12: true
+                            }).format(new Date(Data.crearted_at))
+                            let smt = `<tr>
+                                            <td class="nomproduit"><img src="${Data.imageurl}" alt="smt"><span>${Data.name}</span></td>
+                                            <td>${Data.price}DH</td>
+                                            <td>online</td>
+                                            <td>${formatedDate}</td>
+                                            <td><a class="options" href="/Produit/Edit/${Data.id}">...</a></td>
+                                        </tr>`
+
+                            document.querySelector("tbody").innerHTML += smt
+                        }
+                    })
+            }
+
+            await LoadProduits()
+        });
+    </script>
+</body>
+
+</html>

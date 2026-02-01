@@ -58,17 +58,17 @@ async function ShowProducts() {
     const { data, error } = await supabase.from("produit_s")
         .select()
 
-    if (error) throw data
+    if (error) throw error
 
     return data
 }
 
-async function ShowSpecificProduct(id) {
+async function ShowSpecificProduct(id, predicat = "*") {
     const { data, error } = await supabase.from("produit_s")
-        .select()
+        .select(predicat)
         .eq("id", id)
 
-    if (error) throw data
+    if (error) throw error
 
     return data
 }
@@ -76,9 +76,10 @@ async function ShowSpecificProduct(id) {
 async function FindCli(nom, prenom) {
     const { data, error } = await supabase.from("a_client")
         .select()
-        .eq("nom", nom, "prenom", prenom)
+        .eq("nom", nom)
+        .eq("prenom", prenom)
 
-    if (error) throw data
+    if (error) throw error
 
     return data
 }
@@ -89,7 +90,7 @@ async function ClientAdd(client) {
         .insert({ nom: nom, prenom: prenom, numtel: numt, adresse: adresse, ville: ville })
         .select()
 
-    if (error) throw data
+    if (error) throw error
 
     return data
 }
@@ -100,7 +101,7 @@ async function Order(id, id_client, qte) {
             .insert({ id_client: id_client, id_produit: id, qte: qte })
             .select()
 
-        if (error) throw data
+        if (error) throw error
 
         return data
     } catch (err) {
@@ -108,4 +109,31 @@ async function Order(id, id_client, qte) {
     }
 }
 
-module.exports = { supabase, FetchROWViaNameP, StoreIMGBucket, InsertProduct, ShowProducts, ShowSpecificProduct, FindCli, ClientAdd, Order }
+async function ShowClients() {
+    const { data, error } = await supabase.from("a_client")
+        .select()
+
+    if (error) throw error
+
+    return data
+}
+
+async function ShowOrderViaClient(id) {
+    const { data, error } = await supabase.from("order")
+        .select("id_produit, qte")
+        .eq("id_client", id)
+
+    if (error) throw error
+
+    const resultat = Object.values(data.reduce((acc, {id_produit, qte}) => {
+        if (!acc[id_produit]) {
+            acc[id_produit] = { id_produit, qte: 0}
+        }
+        acc[id_produit].qte += qte
+        return acc
+    }, {}))
+
+    return resultat
+}
+
+module.exports = { supabase, FetchROWViaNameP, StoreIMGBucket, InsertProduct, ShowProducts, ShowSpecificProduct, FindCli, ClientAdd, Order, ShowClients, ShowOrderViaClient }

@@ -21,12 +21,6 @@ produitR.get("/Produits", (req, res) => {
     res.render("listeproduits")
 })
 
-produitR.get("/Liste-Produits", async (req, res) => {
-    const data = await ShowProducts()
-
-    res.json(data)
-})
-
 produitR.get("/Produit/:id", async (req, res) => {
     const pro_id = req.params.id
     let produit

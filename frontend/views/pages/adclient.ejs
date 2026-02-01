@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cité De Soin Et Beauté</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="shortcut icon" href="/img/icon.jpg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="loader">
+        <div id="spinner"></div>
+    </div>
+
+    <div id="everything">
+        <%- include("../includes/adtopbar") %>
+            <main>
+                <div class="center">
+                    <div class="liste" style="width: 80%;">
+                        <div class="top">
+                            <div class="title">
+                                <h2>Clients</h2>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                        <div class="centering">
+                            <div class="scrollablet">
+
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Nom Complete</th>
+                                            <th>Numéro Tel</th>
+                                            <th>Ville</th>
+                                            <th>Adresse</th>
+                                            <th>DATE CREATION</th>
+                                            <th>Produits Commandé</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody" class="tbody">
+                                    </tbody>
+                                </table>
+                                <div class="loadingcontent" id="loadingcontent">
+                                    <h1 id="loadingcontenth1">Loading...</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <%- include("../includes/adfooter") %>
+    </div>
+    <script src="/js/client.js"></script>
+</body>
+
+</html>

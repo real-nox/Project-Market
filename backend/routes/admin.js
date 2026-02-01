@@ -41,11 +41,15 @@ AdminR.get("/Ad/Me", (req, res) => {
     //}
 
 })
-AdminR.get("/Produits-ajouter", (req, res) => {
+AdminR.get("/Ad/Produits", (req, res) => {
+    res.render("pages/adproduits")
+})
+
+AdminR.get("/Ad/Produits/Produit-ajouter", (req, res) => {
     res.render("pages/ajout-p")
 })
 
-AdminR.post("/Produits-ajouter", upload.single("img_p"), async (req, res) => {
+AdminR.post("/Ad/Produits/Produit-ajouter", upload.single("img_p"), async (req, res) => {
     try {
         const { libellep, prixp, descp, stockp } = req.body
         let errors = []
@@ -80,4 +84,9 @@ AdminR.post("/Produits-ajouter", upload.single("img_p"), async (req, res) => {
         console.log(err)
     }
 })
+
+AdminR.get("/Ad/Clients", (req, res) => {
+    res.render("pages/adclient")
+})
+
 module.exports = { AdminR }
