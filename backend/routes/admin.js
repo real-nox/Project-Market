@@ -1,63 +1,92 @@
-const { FetchROWViaNameP, StoreIMGBucket, InsertProduct, UpdateOrder, ShowSpecificProduct, UpdateProduct, FetchROWViaIDP } = require("../config/databaseSupa")
+require("dotenv").config({ quiet: true })
+
+const { FetchROWViaNameP, StoreIMGBucket, InsertProduct, UpdateOrder, ShowSpecificProduct, UpdateProduct, FetchROWViaIDP, RemoveProduct } = require("../config/databaseSupa")
 const express = require("express")
+const { genSaltSync, hashSync, compareSync } = require("bcrypt")
 const { upload } = require("../middleware/upload")
+
 const Sessions = require("../middleware/session-cart")
+const { admin, RateLimit } = require("../middleware/adminL")
+const session = require("express-session")
 
 const AdminR = express.Router()
 
 AdminR.use(Sessions)
+AdminR.use(session({
+    secret: process.env.SEC_SESSION,
+    name: "admin.sid",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        sameSite: "strict",
+        secure: false
+    }
+}))
 
 AdminR.use((req, res, next) => {
-
-    /*if (!req.user)
-        res.locals.user = req.user || []
-    //return res.redirect("/Ad/Login")
-    else {*/
-        res.locals.user = req.user
-        res.locals.errors = req.errors || []
-        res.locals.success = req.success || []
-        res.locals.produitinfo = req.produitinfo || []
-    //}
-
+    res.locals.isAdmin = req.session?.isAdmin || false
+    res.locals.isLimited = req.isLimited || false
+    res.locals.errors = req.errors || []
+    res.locals.success = req.success || []
+    res.locals.produitinfo = req.produitinfo || []
     next()
 })
 
-AdminR.get("/Ad", (req, res) => {
-    if (!req.user)
-        res.redirect("/Ad/Login")
-    else
-        res.redirect("/Ad/Me")
+AdminR.get("/Ad", admin, (req, res) => {
+    res.redirect("/Ad/Me")
 })
 
 AdminR.get("/Ad/Login", (req, res) => {
-    /*if (!req.user)
-        return res.redirect("/Ad/Login")*/
     res.render("admin")
 })
 
-AdminR.get("/Ad/Me", (req, res) => {
-    /*if (!req.user)
-        return res.redirect("/Ad/Login")
-    else {*/
-    const user = req.user
-    res.render("", { user })
-    //}
-
+AdminR.get("/Ad/Me", admin, (req, res) => {
+    const isAdmin = req.session.isAdmin
+    res.render("admin", { isAdmin })
 })
-AdminR.get("/Ad/Produits", (req, res) => {
+
+AdminR.get("/Ad/Logout", admin, (req, res) => {
+    req.session.destroy(() => {
+        res.clearCookie("admin.sid")
+        res.redirect("/Ad")
+    })
+})
+
+AdminR.post("/Ad/Login", RateLimit, (req, res) => {
+    let errors = []
+    const info = req.body
+
+    if (!info.password) {
+        errors = ["Entrer le mot de passe!"]
+        return res.render("admin", { errors })
+    }
+
+    const password = compareSync(info.password, process.env.PASSWORD)
+
+    if (!password) {
+        errors = ["Mot de passe est incorrect"]
+        return res.render("admin", { errors })
+    }
+
+    req.session.isAdmin = true
+    res.redirect("/Ad")
+})
+
+AdminR.get("/Ad/Produits", admin, (req, res) => {
     res.render("pages/adproduits")
 })
 
-AdminR.get("/Ad/Produits/Produit-ajouter", (req, res) => {
+AdminR.get("/Ad/Produits/Produit-ajouter", admin, (req, res) => {
     res.render("pages/ajout-p")
 })
 
-AdminR.post("/Ad/Produits/Produit-ajouter", upload.single("img_p"), async (req, res) => {
+AdminR.post("/Ad/Produits/Produit-ajouter", admin, upload.fields([{ name: "img_p", maxCount: 1 }, { name: "img_p1", maxCount: 1 }]), async (req, res) => {
     try {
         const { libellep, prixp, descp, stockp } = req.body
         let errors = []
         let success = []
-        const file = req.file
+        const files = req.files
 
         if (!libellep || !prixp || !descp || !stockp) {
             errors = ["Completez les informations!"]
@@ -71,13 +100,18 @@ AdminR.post("/Ad/Produits/Produit-ajouter", upload.single("img_p"), async (req, 
             return res.render("pages/ajout-p", { errors })
         }
 
-        let imageUrl
+        let imageUrl = null
+        let imageUrl2 = null
 
-        if (file) {
-            imageUrl = await StoreIMGBucket(file)
+        if (Object.values(files)[0]) {
+            imageUrl = await StoreIMGBucket(Object.values(files)[0])
         }
 
-        let propriety = { libellep, prixp, descp, stockp, imageUrl }
+        if (Object.values(files)[1]) {
+            imageUrl2 = await StoreIMGBucket(Object.values(files)[1])
+        }
+
+        let propriety = { libellep, prixp, descp, stockp, imageUrl, imageUrl2 }
 
         await InsertProduct(propriety)
 
@@ -88,29 +122,29 @@ AdminR.post("/Ad/Produits/Produit-ajouter", upload.single("img_p"), async (req, 
     }
 })
 
-AdminR.get("/Ad/Clients", (req, res) => {
+AdminR.get("/Ad/Clients", admin, (req, res) => {
     res.render("pages/adclient")
 })
 
-AdminR.get("/Ad/Commandes", (req, res) => {
+AdminR.get("/Ad/Commandes", admin, (req, res) => {
     res.render("pages/adcommande")
 })
 
-AdminR.get("/Commande/Completed/:id", async (req, res) => {
+AdminR.get("/Commande/Completed/:id", admin, async (req, res) => {
     const id = req.params.id
 
     await UpdateOrder(id, "compléte")
     res.redirect("/Ad/Commandes")
 })
 
-AdminR.get("/Commande/Cancel/:id", async (req, res) => {
+AdminR.get("/Commande/Cancel/:id", admin, async (req, res) => {
     const id = req.params.id
 
     await UpdateOrder(id, "annulé")
     res.redirect("/Ad/Commandes")
 })
 
-AdminR.get("/Produit/Edit/:id", async (req, res) => {
+AdminR.get("/Produit/Edit/:id", admin, async (req, res) => {
     const id_produit = req.params.id
     let produitinfo = []
 
@@ -119,14 +153,14 @@ AdminR.get("/Produit/Edit/:id", async (req, res) => {
     res.render("pages/edit-p", { produitinfo })
 })
 
-AdminR.post("/Ad/Produits/Produit-edit", upload.single("img_p"), async (req, res) => {
-        try {
-        const { id, libellep, prixp, descp, stockp, imageurl } = req.body
+AdminR.post("/Ad/Produits/Produit-edit", admin, upload.fields([{ name: "img_p", maxCount: 1 }, { name: "img_p1", maxCount: 1 }]), async (req, res) => {
+    try {
+        const { id, libellep, prixp, descp, stockp, imageurl, imageurl2 } = req.body
         let errors = []
         let success = []
-        const file = req.file
+        const files = req.files
 
-        if (!(libellep && prixp &&  descp && stockp)) {
+        if (!(libellep && prixp && descp && stockp)) {
             errors = ["Completez au moins une information!"]
             return res.render("pages/edit-p", { errors })
         }
@@ -136,19 +170,43 @@ AdminR.post("/Ad/Produits/Produit-edit", upload.single("img_p"), async (req, res
         if (!data.length)
             return res.status(404).send("Page unfound!")
 
-        let imageUrl
+        let imageUrl = null
+        let imageUrl2 = null
 
-        if (file)
-            imageUrl = await StoreIMGBucket(file)
+        if (Object.values(files)[0]) {
+            imageUrl = await StoreIMGBucket(Object.values(files)[0])
+        }
+
+        if (Object.values(files)[1]) {
+            imageUrl2 = await StoreIMGBucket(Object.values(files)[1])
+        }
+
 
         imageUrl = imageUrl ? imageUrl : imageurl
-        let propriety = { libellep, prixp, descp, stockp, imageUrl }
+        let propriety = { libellep, prixp, descp, stockp, imageUrl, imageUrl2 }
 
         await UpdateProduct(propriety, id)
 
         let produitinfo = data[0]
         success = ["Le produit est maintement modifié!"]
         return res.render("pages/edit-p", { success, produitinfo })
+    } catch (err) {
+        console.error(err)
+    }
+})
+
+AdminR.post("/Ad/Produits/Retirer/:id", admin, async (req, res) => {
+    try {
+        const id = req.params.id
+
+        const { data, error } = await FetchROWViaIDP(id)
+
+        if (!data.length)
+            return res.status(404).send("Page unfound!")
+
+        await RemoveProduct(id)
+
+        return res.redirect("/Ad/Produits")
     } catch (err) {
         console.error(err)
     }

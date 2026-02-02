@@ -19,25 +19,46 @@
         <%- include("includes/adtopbar") %>
             <main>
                 <div class="centerpart">
-                    <div class="loginc">
-                        <div class="abox">
-                            <form action="/Login" method="post">
-                                <h2>Connection</h2>
-                                <div class="itemlog">
-                                    <input class="inputt" type="text" name="nom" id="nom" placeholder="Email">
-                                </div>
-                                <div class="itemlog">
-                                    <input class="inputt" type="password" name="password" id="password"
-                                        placeholder="Mot de passe">
-                                </div>
-                                <div class="itemlog">
-                                    <div class="btnitem">
-                                        <button type="submit">Se Connecter</button>
-                                    </div>
-                                </div>
+                    <%if(typeof isAdmin==="undefined" || !isAdmin) { %>
+                        <div class="loginc">
+                            <% if (typeof errors !=="undefined" ) {%>
+                                <% if (errors && errors.length) { %>
+                                    <% errors.forEach(err=> { %>
+                                        <h3 style="color: rgb(182, 2, 2); padding-top: 60px;">
+                                            <%= err %>
+                                        </h3>
+                                        <% }) %>
+                                            <% } %>
+                                                <% } %>
+
+                                                    <div class="abox">
+                                                        <%if(typeof isLimited==="undefined" || !isLimited) { %>
+                                                            <form action="/Ad/Login" method="post">
+                                                                <h2>Connection</h2>
+                                                                <div class="itemlog">
+                                                                    <input class="inputt" type="password"
+                                                                        name="password" id="password"
+                                                                        placeholder="Mot de passe">
+                                                                </div>
+                                                                <div class="itemlog">
+                                                                    <div class="btnitem">
+                                                                        <button type="submit">Se Connecter</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                            <% } else { %>
+                                                                <h2>Connection</h2>
+                                                                <div class="itemlog">
+                                                                    <input class="inputt" type="password"
+                                                                        name="password" id="password"
+                                                                        placeholder="Mot de passe" disabled>
+                                                                </div>
+                                                                <% } %>
+                                                    </div>
                         </div>
-                        </form>
-                    </div>
+                        <% } else {%>
+                            <p>Welcome Admin</p>
+                            <% } %>
                 </div>
             </main>
 

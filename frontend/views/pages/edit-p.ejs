@@ -17,83 +17,100 @@
 
     <div id="everything">
         <%- include("../includes/adtopbar") %>
-        <main>
-            <div class="centerpart">
-                <div class="boxc">
-                    <div class="box">
-                        <h2>Edité Le Produit</h2>
-                        <div class="formp">
-                            <form action="/Ad/Produits/Produit-edit" method="post" enctype="multipart/form-data">
-                                <div class="grid">
-                                    <div class="itempr">
-                                        <div class="itempr1">
-                                            <label>Libellé Produit</label>
-                                            <input type="text" name="id" id="id" style="display: none;" value="<%= produitinfo.id %>" >
-                                            <input type="text" name="libellep" id="libellep"
-                                                placeholder="Entrer le libellé du produit" value="<%= produitinfo.name %>">
+            <main>
+                <div class="centerpart">
+                    <div class="boxc">
+                        <div class="box">
+                            <h2>Edité Le Produit</h2>
+                            <div class="formp1">
+                                <form action="/Ad/Produits/Produit-edit" method="post" enctype="multipart/form-data">
+                                    <div class="grid">
+                                        <div class="itempr">
+                                            <div class="itempr1">
+                                                <label>Libellé Produit</label>
+                                                <input type="text" name="id" id="id" style="display: none;"
+                                                    value="<%= produitinfo.id %>">
+                                                <input type="text" name="libellep" id="libellep"
+                                                    placeholder="Entrer le libellé du produit"
+                                                    value="<%= produitinfo.name %>">
+                                            </div>
+                                            <div class="itempr2">
+                                                <label>Prix Produit</label>
+                                                <input type="number" name="prixp" id="prixp"
+                                                    placeholder="Entrer le prix du produit" min="0" max="100000"
+                                                    value="<%= produitinfo.price %>">
+                                            </div>
                                         </div>
-                                        <div class="itempr2">
-                                            <label>Prix Produit</label>
-                                            <input type="number" name="prixp" id="prixp"
-                                                placeholder="Entrer le prix du produit" min="0" max="100000" value="<%= produitinfo.price %>">
+                                        <div class="itempr">
+                                            <label>Description Produit</label>
+                                            <textarea placeholder="Entrer la description du produit" name="descp"
+                                                id="descp"><%= produitinfo.description %></textarea>
+                                        </div>
+                                        <div class="itempr">
+                                            <label>Stock Produit</label>
+                                            <input type="number" name="stockp" id="stockp"
+                                                placeholder="Entrer la quantité du produit" min="0" max="100000"
+                                                value="<%= produitinfo.stock %>">
+                                        </div>
+                                        <div class="itempr3">
+                                            <div class="part1img">
+                                                <div class="inside">
+                                                    <input type="file" name="img_p" id="img_p" />
+                                                    <label id="imgs" for="img_p"><img src="<%= produitinfo.imageurl %>"
+                                                            id="imgshow" alt="Preview"></label>
+                                                </div>
+                                            </div>
+                                            <div class="part2img">
+                                                <div class="inside1">
+                                                    <input type="file" name="img_p1" id="img_p1" />
+                                                    <label id="imgs1" for="img_p1"><img
+                                                            src="<%= produitinfo.imageurl2 %>" id="imgshow"
+                                                            alt="Not Added"></label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="itempr">
-                                        <label>Description Produit</label>
-                                        <textarea placeholder="Entrer la description du produit" name="descp"
-                                            id="descp"><%= produitinfo.description %></textarea>
-                                    </div>
-                                    <div class="itempr">
-                                        <label>Stock Produit</label>
-                                        <input type="number" name="stockp" id="stockp"
-                                            placeholder="Entrer la quantité du produit" min="0" max="100000" value="<%= produitinfo.stock %>">
-                                    </div>
-                                    <div class="itempr3">
-                                        <div class="">
-                                            <input type="file" name="img_p" id="img_p" />
-                                            <label id="imgs" for="img_p">Image Produit</label>
-                                        </div>
-                                        <div class="imagesshow" id="imagesshow">
-                                            <input type="text" name="imageurl" id="imageurl" style="display: none;" value="<%= produitinfo.imageurl %>" >
-                                            <img src="<%= produitinfo.imageurl %>" id="imgshow" alt="Preview">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="btnitempr">
-                                    <button id="btncool" type="submit">Ajouter</button>
-                                    <div id="responsecard"
-                                        class="responsecard <%= (errors && errors.length) ? 'open err' : '' || (success && success.length) ? 'open success' : '' %>">
-                                        <% if (errors && errors.length) { %>
-                                            <h4>Erreur!</h4>
-                                            <ul>
-                                                <% errors.forEach(err=> { %>
-                                                    <li>
-                                                        <%= err %>
-                                                    </li>
-                                                    <% }) %>
-                                            </ul>
-                                            <% } %>
+                                    <div class="btnitempr">
+                                            <button id="btncool" type="submit">Modifier</button>
+                                        <div id="responsecard"
+                                            class="responsecard <%= (errors && errors.length) ? 'open err' : '' || (success && success.length) ? 'open success' : '' %>">
+                                            <% if (errors && errors.length) { %>
+                                                <h4>Erreur!</h4>
+                                                <ul>
+                                                    <% errors.forEach(err=> { %>
+                                                        <li>
+                                                            <%= err %>
+                                                        </li>
+                                                        <% }) %>
+                                                </ul>
+                                                <% } %>
 
-                                                <% if (success && success.length) { %>
-                                                    <h4>Produit a été ajouté!</h4>
-                                                    <ul>
-                                                        <% success.forEach(msg=> { %>
-                                                            <li>
-                                                                <%= msg %>
-                                                            </li>
-                                                            <% }) %>
-                                                    </ul>
-                                                    <% } %>
+                                                    <% if (success && success.length) { %>
+                                                        <h4>Produit a été ajouté!</h4>
+                                                        <ul>
+                                                            <% success.forEach(msg=> { %>
+                                                                <li>
+                                                                    <%= msg %>
+                                                                </li>
+                                                                <% }) %>
+                                                        </ul>
+                                                        <% } %>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
+                            <form action="/Ad/Produits/Retirer/<%=produitinfo.id%>" method="post">
+                            <div class="retirerbtn"
+                                style="display: flex; justify-content: end;justify-content: end; width: 100%; padding-top: 50px;">
+                                <button style="height: 50%;" id="btncool1" type="submit">Retirer</button>
+                            </div>
+                        </form>
                         </div>
                     </div>
                 </div>
-            </div>
-        </main>
+            </main>
 
-        <%- include("../includes/adfooter") %>
+            <%- include("../includes/adfooter") %>
     </div>
 
     <script>

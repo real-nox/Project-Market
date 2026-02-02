@@ -66,6 +66,27 @@
     outline: none;
 }
 
+#btncool1 {
+    height: 40px;
+    width: 120px;
+    font-size: medium;
+
+    border: 2px solid #880000d8;
+    background-color: #ff000071;
+    color: rgb(0, 0, 0);
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    transition: all 0.5s ease;
+}
+
+#btncool1:hover {
+    border: 2px solid #ff000071;
+    background-color: #880000d8;
+    color: white;
+}
+
 button {
     height: 40px;
     width: 190px;

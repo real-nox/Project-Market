@@ -1,7 +1,6 @@
 const express = require("express")
 const { ShowProducts, ShowSpecificProduct, FindCli, ClientAdd, Order } = require("../config/databaseSupa")
 const Sessions = require("../middleware/session-cart")
-const jwt = require("jsonwebtoken")
 
 const produitR = express.Router()
 const cacheP = {}

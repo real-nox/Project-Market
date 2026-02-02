@@ -29,11 +29,11 @@ async function FetchROWViaIDP(id) {
 }
 
 async function StoreIMGBucket(file) {
-    const fileName = `${new Date().toString().replace(/:/g, "-")}-${file.originalname}`
+    const fileName = `${new Date().toString().replace(/:/g, "-")}-${file[0].originalname}`
 
     const { error } = await supabase.storage
         .from("produits")
-        .upload(fileName, fs.createReadStream(file.path), { contentType: file.mimetype })
+        .upload(fileName, fs.createReadStream(file[0].path), { contentType: file[0].mimetype })
 
     if (error) throw error
 
@@ -41,12 +41,12 @@ async function StoreIMGBucket(file) {
         .from("produits")
         .getPublicUrl(fileName)
 
-    fs.unlinkSync(file.path)
+    fs.unlinkSync(file[0].path)
     return data.publicUrl
 }
 
 async function InsertProduct(Arg) {
-    let { libellep, prixp, descp, stockp, imageUrl } = Arg;
+    let { libellep, prixp, descp, stockp, imageUrl, imageUrl2 } = Arg;
 
     const { error } = await supabase
         .from("produit_s")
@@ -56,7 +56,8 @@ async function InsertProduct(Arg) {
                 description: descp,
                 price: prixp,
                 stock: stockp,
-                imageurl: imageUrl
+                imageurl: imageUrl,
+                imageurl2: imageUrl2
             }
         ])
 
@@ -196,12 +197,24 @@ async function UpdateOrder(id, status) {
 }
 
 async function UpdateProduct(Arg, id) {
-    let { libellep, prixp, descp, stockp, imageUrl } = Arg;
+    let { libellep, prixp, descp, stockp, imageUrl, imageUrl2 } = Arg;
 
     const { data, error } = await supabase
         .from("produit_s")
         .update(
-            { name: libellep, description: descp, price: prixp, stock: stockp, imageurl: imageUrl })
+            { name: libellep, description: descp, price: prixp, stock: stockp, imageurl: imageUrl, imageurl2: imageUrl2 })
+            .eq("id", id)
+
+    if (error) throw error
+    return data
+}
+
+async function RemoveProduct(id) {
+
+    const { data, error } = await supabase
+        .from("produit_s")
+        .update(
+            { status: "retiré" })
             .eq("id", id)
 
     if (error) throw error
@@ -225,5 +238,6 @@ module.exports = {
     ShowOrderViaClient,
     ShowSpecificClient,
     UpdateOrder,
-    UpdateProduct
+    UpdateProduct,
+    RemoveProduct
 }

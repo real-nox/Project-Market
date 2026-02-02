@@ -6,16 +6,18 @@
             </div>
             <div id="part2-nav">
                 <div class="sectionsnav">
-                    <a href="/Ad/Produits">Produits</a>
-                    <a href="/Ad/Commandes">Commandes</a>
-                    <a href="/Ad/Clients">Clients</a>
-                    <div class="contact">
-                        <% if(user && user.length) {%>
-                            <a href="/Ad/Logout">Logout</a>
-                            <% } else { %>
-                                <a href="/Ad/Login">Login</a>
+                    <% if(typeof isAdmin==="undefined" || !isAdmin) { %>
+                        <div class="contact">
+                            <a href="/Ad/Login">Login</a>
+                        </div>
+                        <% } else {%>
+                            <a href="/Ad/Produits">Produits</a>
+                            <a href="/Ad/Commandes">Commandes</a>
+                            <a href="/Ad/Clients">Clients</a>
+                            <div class="contact">
+                                <a href="/Ad/Logout">Logout</a>
                                 <% } %>
-                    </div>
+                            </div>
                 </div>
             </div>
         </nav>
