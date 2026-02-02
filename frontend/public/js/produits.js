@@ -2,10 +2,7 @@ window.addEventListener("load", async () => {
     const container = document.getElementById("produitsl")
     container.innerHTML = ""
 
-    document.getElementById("loader").classList.add("hide");
-    document.getElementById("everything").classList.add("show");
-
-    async function ListePorduits(data) {
+    function ListeProduits(data) {
         try {
             data.forEach(element => {
                 const { id, name, description, price, stock, created_at, imageurl } = element
@@ -19,7 +16,7 @@ window.addEventListener("load", async () => {
                                     <p>${price} DH</p>
                                 </div>
                                 <div class="backgroundtemp load">
-                                    <img style="width:300px; height:300px" src="${imageurl}" alt="${name}" class="product-img">
+                                    <img style="width:300px; height:300px" src="${imageurl}" alt="${name}" class="product-img theimg">
                                 </div>
                                 <div class="downtemp" >
                                     <button class="downtempbtn" data-id="${id}">Buy now </button>
@@ -29,13 +26,19 @@ window.addEventListener("load", async () => {
 
                 container.appendChild(card)
 
-                const background = document.querySelector(".backgroundtemp")
-                const img = background.querySelector("img")
+                const background = card.querySelector(".backgroundtemp")
+                const img = background.querySelector(".theimg")
 
-                img.addEventListener("load", (e) => {
-                    background.classList.remove("load")
+                if (img.complete) {
                     img.classList.add("loaded")
-                })
+                    background.classList.remove("load")
+                } else {
+                    img.addEventListener("load", () => {
+                        img.classList.add("loaded")
+                        background.classList.remove("load")
+                    })
+                }
+
             })
         } catch (err) {
             console.error(err);
@@ -50,22 +53,33 @@ window.addEventListener("load", async () => {
         const { data, exp } = JSON.parse(cached)
 
         if (exp > Date.now()) {
-            await ListePorduits(data)
+            document.getElementById("loader").classList.add("hide");
+            document.getElementById("everything").classList.add("show");
+            ListeProduits(data)
         } else {
             sessionStorage.removeItem("produits")
+            await Loaddata()
         }
     } else {
+        await Loaddata()
+    }
+
+    async function Loaddata() {
         const resultat = await fetch("/api/Liste-Produits")
+        if (!resultat.ok) throw new Error("Failed to fetch products")
         const data = await resultat.json()
 
         if (!data.length) {
+            document.getElementById("loader").classList.add("hide");
+            document.getElementById("everything").classList.add("show");
             const h1 = document.createElement("h1")
-            h1.innerHTML = "Il se peut qu'il n'y ait rien"
             container.classList.add("not")
             container.appendChild(h1)
         }
 
-        await ListePorduits(data)
+        document.getElementById("loader").classList.add("hide");
+        document.getElementById("everything").classList.add("show");
+        ListeProduits(data)
 
         sessionStorage.setItem("produits", JSON.stringify({
             data,
@@ -73,12 +87,12 @@ window.addEventListener("load", async () => {
         }))
     }
 
-    document.querySelectorAll(".downtempbtn").forEach(button => {
-        button.addEventListener("click", (e) => {
+    container.addEventListener("click", (e) => {
+        if (e.target.classList.contains("downtempbtn")) {
             const id = parseInt(e.target.dataset.id)
 
             addCart(id, 1)
-        })
+        }
     })
 
     function addCart(id, qtn) {

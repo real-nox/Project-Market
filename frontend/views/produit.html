@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cité De Soin Et Beauté</title>
+    <link rel="stylesheet" href="../public/css/main.css">
+    <link rel="stylesheet" href="../public/css/cart.css">
+    <link rel="shortcut icon" href="../public/img/icon.jpg" type="image/x-icon">
+</head>
+
+<body>
+    <div id="loader">
+        <div id="spinner"></div>
+    </div>
+
+    <div id="everything">
+        <header lass="maincontainer" id="">
+            <div class="topcontainer">
+                <nav class="navigation">
+                    <div id="part1-nav">
+                        <a href="/">Cité de Soin & Beauté</a>
+                    </div>
+                    <div id="part2-nav">
+                        <div class="sectionsnav">
+                            <a href="/A-propos-de-nous">À propos de nous</a>
+                            <a href="/Produits">Produits</a>
+                            <a style="cursor: pointer;" onclick="onCart()">Mon Panier</a>
+                            <div class="contact">
+                                <a href="#contactez-nous">Contactez-nous</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <script src="/js/cartclick.js"></script>
+        </header>
+
+
+
+
+
+
+
+
+
+        <main>
+            <div class="background"></div>
+            <div class="cartc">
+                <div class="scrollablet">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Produit</th>
+                                <th>Quantité</th>
+                                <th>Prix</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="https://mnnpwpjxgzrcvyelxmzp.supabase.co/storage/v1/object/public/produits/Mon%20Feb%2002%202026%2016-58-37%20GMT+0100%20(GMT+01-00)-feed1.png"
+                                        alt="">
+                                    <span>ezzzfzfzfzf</span>
+                                </td>
+                                <td><input class="valuec" type="number" name="" id="" min="1" max="52" value="4"
+                                        data-value="4" data-id="12"></td>
+                                <td class="prix">45024DH</td>
+                                <td><button class="removeitem" data-id="12" type="button"><span class="material-symbols-outlined">close</span></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="buttonconfirm">
+                    <button type="button" id="confirmCart" class="confirmCart">Confirmer</button>
+                </div>
+            </div>
+        </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <footer>
+            <div class="contactme" id="contactez-nous">
+                <div class="partContact">
+                    <div class="contactmec">
+                        <h1>Contactez nous</h1>
+                        <form action="/SendMSGContact" method="post">
+                            <div class="items">
+                                <label>Nom Complet *</label>
+                                <input placeholder="ex : Mohammed Amine Sirri" type="text" name="nomc" maxlength="30"
+                                    minlength="5">
+                            </div>
+                            <div class="items">
+                                <label>Email *</label>
+                                <input placeholder="ex : mohammed.amine@exemple.com" type="text" name="email"
+                                    maxlength="60" minlength="5">
+                            </div>
+                            <div class="items">
+                                <label>Message *</label>
+                                <textarea placeholder="Saisissez votre message ici." name="message" maxlength="150"
+                                    minlength="5"></textarea>
+                            </div>
+                            <div class="items">
+                                <button type="submit">Envoyer Le Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="part2Footer">
+                    <div class="holder">
+                        <div class="credit1">
+                            <a href="#">Cité de Soin & Beauté</a>
+                        </div>
+                        <div class="credit2">
+                            <div class="contactus">
+                                <h3>Contactez nous</h3>
+                                <p>Téléphone</p>
+                                <h5>0612442810</h5>
+                                <p>Email</p>
+                                <h5>citedesoinetbeaute@gmail.com</h5>
+                            </div>
+                            <div class="followus">
+                                <h3>Suivez nous</h3>
+                                <div class="social" style="margin-top: 15px;">
+                                    <a target="_blank" href="https://www.instagram.com/citedesoinetbeaute/">
+                                        <img src="/img/insta.png" alt="">
+                                    </a>
+                                    <a href="https://www.threads.com/@citedesoinetbeaute" target="_blank"
+                                        rel="noopener noreferrer">
+                                        <img src="/img/threads.png" alt="">
+                                    </a>
+                                    <a href="">
+                                        <img src="/img/facebook.png" alt="">
+                                    </a>
+                                    <a href="">
+                                        <img src="/img/whatsapp.png" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="credit3">
+                            <p>&copy; 2026 Cité de Soin & Beauté</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        window.addEventListener("load", () => {
+            document.getElementById("loader").classList.add("hide");
+            document.getElementById("everything").classList.add("show");
+        });
+    </script>
+</body>
+
+</html>

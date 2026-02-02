@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cité De Soin Et Beauté</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/cart.css">
     <link rel="shortcut icon" href="/img/main.png" type="image/x-icon">
-</head>
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=close" />
 <body>
     <div id="loader">
         <div id="spinner"></div>
@@ -18,113 +18,62 @@
         <%- include("includes/topbar") %>
 
             <main>
-                <div class="stcontainer">
-                    <div class="pinktop">
-                        <div class="centering">
-                            <div class="textside">
-                                <h1>A good cake for a day</h1>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, facilis!</p>
-                                <a href="/Produits">Nos Produits</a>
-                            </div>
-                            <div class="picside">
-                                <img src="/img/main.png" alt="Smt">
+                <%- include("includes/cart") %>
+                    <div class="stcontainer">
+                        <div class="pinktop">
+                            <div class="centering">
+                                <div class="textside">
+                                    <h1>A good cake for a day</h1>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus, facilis!
+                                    </p>
+                                    <a href="/Produits">Nos Produits</a>
+                                </div>
+                                <div class="picside">
+                                    <img src="/img/main.png" alt="Smt">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="pinkdown">
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo?</p>
-                    </div>
-                </div>
-                <div class="productsc">
-                    <div class="listproduits" id="produits">
-                        <div class="sectop">
-                            <h1>Nos Produits</h1>
-                            <a href="/Produits">Tous</a>
-                        </div>
-                        <div class="produits" id="produitsl">
+                        <div class="pinkdown">
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo?</p>
                         </div>
                     </div>
-                </div>
-                <div class="sperator"></div>
-                <div class="instaFeed">
-                    <div class="feeds">
-                        <h1>Instagram Feed</h1>
-                        <div class="listfeed">
-                            <div class="feedcol1">
-                                <img src="/img/feedm.png" alt="">
+                    <div class="productsc">
+                        <div class="listproduits" id="produits">
+                            <div class="sectop">
+                                <h1>Nos Produits</h1>
+                                <a href="/Produits">Tous</a>
                             </div>
-                            <div class="feedcol2">
-                                <img src="/img/feed1.png" alt="">
-                                <img src="/img/feed2.png" alt="">
-                                <img src="/img/feed3.png" alt="">
-                                <img src="/img/feed4.png" alt="">
-                                <img src="/img/feed5.png" alt="">
-                                <img src="/img/feed6.png" alt="">
+                            <div class="produits" id="produitsl">
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="sperator1"></div>
+                    <div class="sperator"></div>
+                    <div class="instaFeed">
+                        <div class="feeds">
+                            <h1>Instagram Feed</h1>
+                            <div class="listfeed">
+                                <div class="feedcol1">
+                                    <img src="/img/feedm.png" alt="">
+                                </div>
+                                <div class="feedcol2">
+                                    <img src="/img/feed1.png" alt="">
+                                    <img src="/img/feed2.png" alt="">
+                                    <img src="/img/feed3.png" alt="">
+                                    <img src="/img/feed4.png" alt="">
+                                    <img src="/img/feed5.png" alt="">
+                                    <img src="/img/feed6.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sperator1"></div>
             </main>
 
             <%- include("includes/footer") %>
     </div>
 
-    <script>
-        //Cache the repeated server data
-        window.addEventListener("load", () => {
-            const container = document.getElementById("produitsl")
-            container.innerHTML = ""
-
-            document.getElementById("loader").classList.add("hide");
-            document.getElementById("everything").classList.add("show");
-
-
-            async function ListePorduits() {
-                const resultat = await fetch("/Liste-Produits")
-                const data = await resultat.json()
-
-                console.log(data)
-                if (!data.length) {
-                    return
-                }
-
-                for (let i = 0; i < 3 && i < data.length; i++) {
-                    const element = data[i]
-                    const { id, name, description, price, stock, created_at, imageurl } = element
-
-                    const card = document.createElement("div")
-                    card.className = "templateP fade-in"
-
-                    card.innerHTML = `
-                                <div class="toptemp">
-                                    <h3>${name}</h3>
-                                    <p>${price} DH</p>
-                                </div>
-                                <div class="backgroundtemp load">
-                                    <img style="width:300px; height:300px" src="${imageurl}" alt="${name}" class="product-img">
-                                </div>
-                                <div class="downtemp">
-                                    <button class="downtempbtn" href="Produit/Buy/${id}" onclick="addtoCart">Buy now </button>
-                                    <a href="/Produit/${id}">Learn more</a>
-                                    <div id="responsecard" class="responsecard">
-                                </div>`
-
-                    container.appendChild(card)
-
-                    const background = card.querySelector(".backgroundtemp")
-                    const img = background.querySelector("img")
-
-                    img.addEventListener("load", () => {
-                        background.classList.remove("load")
-                        img.classList.add("loaded")
-                    })
-                }
-            }
-
-            ListePorduits()
-        });
-    </script>
+    <script src="/js/main.js"></script>
+    <script src="/js/cartclick.js"></script>
 </body>
 
 </html>

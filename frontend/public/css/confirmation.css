@@ -24,29 +24,80 @@
 }
 
 .part2info {
-    background-color: wheat;
+    background-color: rgba(255, 147, 230, 0.84);
     height: 100%;
-    width: 120%;
+    width: 105%;
+    display: flex;
+    justify-content: center;
 }
 
-.template {
-    height: 50px;
+.topform,
+.centerform,
+.bottomform {
+    padding-top: 20px;
+    height: 80px;
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
 }
 
-.template .part1h4 {
+.partone,
+.parttwo {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    color: white;
 }
 
-.template .part1h4 img {
-    height: 50px;
-    width: 50px;
+.partone label,
+.parttwo label {
+    font-size: 1.1rem;
 }
 
-.template .part2h4 {
-        display: flex;
-    justify-content: space-around;
+.partone input,
+.parttwo input,
+.parttwo select {
+    margin-top: 5px;
+    width: 250px;
+    height: 35px;
+    border: 2px solid white;
+    background-color: transparent;
+    border-radius: 2px;
+    text-transform: capitalize;
+}
+
+.theconfirmationbtn {
+    display: flex;
+    justify-content: center;
+    margin: 25px;
+}
+
+.theconfirmationbtn button {
+    width: 35%;
+    height: 35px;
+    border: 2px solid rgba(201, 57, 158, 0.855);
+    background-color: #843267;
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.theconfirmationbtn button:hover {
+    border: 2px solid #843267;
+    background-color: rgba(201, 57, 158, 0.855);
+    color: white;
+}
+
+.errorpart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.errorpart p {
+    color: rgb(225, 68, 68);
 }

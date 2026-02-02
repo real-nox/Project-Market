@@ -1,87 +1,31 @@
+.background {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.background.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 .cartc {
-    background-color: rgb(255, 255, 255);
-    height: 450px;
-    width: 400px;
+    background-color: rgba(255, 255, 255, 0.923);
+    height: 470px;
+    width: 480px;
     z-index: 999;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(255, 97, 168, 0.314);
+    box-shadow: 0 10px 25px rgba(31, 31, 31, 0.07);
+
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.cart {
-    width: 95%;
-    height: 95%;
-}
-
-.cart .topcart {
-    background-color: rgb(245, 245, 245);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    height: 12%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.cart .topcart .part1h4 {
-    width: 120px;
-}
-
-.cart .topcart .part2h4 {
-    display: flex;
-    justify-content: space-around;
-    width: 150px;
-}
-
-.cart .centercart {
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-.template {
-    background-color: rgb(192, 192, 192);
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-}
-
-.template .part1h4 {
-    width: 25%;
-    text-align: start;
-}
-
-.template img {
-    height: 25px;
-    width: 25px;
-}
-
-.template .part1h4,
-.template .part2h4 {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.template .part2h4 {
-    width: 30%;
-    gap: 30px;
-}
-
-.template .part2h4 input {
-    width: 20px;
-    text-align: center;
 }
 
 .cartc.closed {
@@ -112,4 +56,80 @@
 .buttonconfirm button:hover {
     border-color: rgb(14, 134, 18);
     background-color: rgb(18, 121, 30);
+}
+
+.scrollablet {
+    height: 90%;
+    width: 100%;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+}
+
+table {
+    width: 100%;
+    height: auto;
+    border-collapse: collapse;
+    border : 2px solid rgba(196, 196, 196, 0.57);
+    border-radius: 10px;
+}
+
+table tr {
+    border-radius: 25px;
+    scroll-snap-align: start;
+}
+
+th {
+    background-color: rgb(227, 227, 227);
+    color: rgb(60, 60, 60);
+    height: 50px;
+    font-size: large;
+    position: sticky;
+    top: 0;
+    text-align: start;
+}
+
+tbody {
+    overflow-x: hidden;
+    background-color: white;
+}
+
+tbody tr {
+    border-bottom: 2px solid rgba(196, 196, 196, 0.57);
+    height: 45px;
+    background-color: transparent;
+    transition: all 0.5s ease;
+}
+
+tbody tr:hover {
+    background-color: #eeeeee;
+}
+
+thead tr th,
+tbody tr td {
+    padding-left: 20px;
+}
+
+td img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    vertical-align: middle;
+    margin-right: 5px;
+    border-radius: 4px;
+}
+
+td input {
+    border: 0;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.prix {
+    font-size: 14px;
+    color: #818181;
+}
+
+td .delete {
+    cursor: pointer;
+    color: red;
 }

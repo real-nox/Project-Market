@@ -9,24 +9,74 @@
 .cetproduit {
     max-width: 850px;
     width: 100%;
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .centerproduit {
     width: 100%;
     height: 80%;
+}
+
+.containerP {
     display: flex;
+    border: 1.5px solid rgba(177, 177, 177, 0.419);
+    background-color: rgb(251, 251, 251);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.145);
+    border-radius: 15px;
 }
 
 .side1 {
-    border: 1.5px solid rgba(0, 0, 0, 0.2);
-    background-color: rgb(244, 244, 244);
-    border-radius: 15px;
     width: 50%;
-    margin-right: 35px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.145);
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+}
+
+.between {
+    background-color: rgba(177, 177, 177, 0.419);
+    width: 2px;
+    margin-right: 15px;
+}
+
+.slides {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.side1 .imgs {
+    height: 340px;
+    width: 340px;
+    padding-top: 15px;
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.side1 .imgs img {
+    flex: 1 0 100%;
+    scroll-snap-align: start;
+    object-fit: cover;
+    background-color: #f8f8f8;
+}
+
+.side1 .downbar {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.side1 .downbar img {
+    border-radius: 10px;
+    height: 50px;
+    width: 50px;
+    background-color: #f8f8f8;
 }
 
 .side1 img {
@@ -35,8 +85,9 @@
 }
 
 .side2 {
-    width: 50%;
+    width: 60%;
     padding-top: 35px;
+    padding-left: 20px;
 }
 
 .side2 p {
@@ -136,7 +187,7 @@
 }
 
 .acht button:hover {
-        background-color: rgb(183, 33, 86);
+    background-color: rgb(183, 33, 86);
     border: 2px solid rgb(255, 114, 154);
     color: rgb(33, 33, 33);
 }

@@ -58,13 +58,66 @@ produitR.post("/Produit/acheter", (req, res) => {
     }
 
     res.cookie("cart", JSON.stringify(cart), {
-        maxAge: 1000 * 60 * 60,
         sameSite: "lax",
-        path: "/"
+        path: "/",
+        maxAge: 1000 * 60 * 60
     })
-    console.log(req.cart)
-
     res.json({ success: true, message: "Ajouté!" })
+})
+
+produitR.post("/Produit/Remove", (req, res) => {
+    const { produitID } = req.body
+
+    if (!produitID) {
+        return res.json({ success: false, message: "ProduitID manquant" })
+    }
+
+    const cart = req.cart
+
+    const index = cart.findIndex(i => i.id === produitID)
+
+    if (index > -1) {
+        cart.splice(index, 1)
+        res.cookie("cart", JSON.stringify(cart), {
+            sameSite: "lax",
+            path: "/",
+            maxAge: 1000 * 60 * 60
+        })
+        return res.json({ success: true, message: "Retiré!" })
+    } else {
+        return res.json({ success: false, message: "Erreur!" })
+    }
+})
+
+produitR.post("/Produit/Update", (req, res) => {
+    const { produitID, qte } = req.body
+
+    const cart = req.cart
+
+    const index = cart.findIndex(i => i.id === produitID)
+
+    if (index > -1) {
+        if (cart[index].qte > 100) {
+            res.json({ success: false, message: "Impossible de dépasser 100 produit. Contactez nous pour plus d'info!" })
+        }
+        cart[index].qte += qte
+
+        res.cookie("cart", JSON.stringify(cart), {
+            sameSite: "lax",
+            path: "/",
+            maxAge: 1000 * 60 * 60
+        })
+        return res.json({ success: true, message: "Modifier!" })
+    } else {
+        cart.push({ id: produitID, qte: qte })
+
+        res.cookie("cart", JSON.stringify(cart), {
+            sameSite: "lax",
+            path: "/",
+            maxAge: 1000 * 60 * 60
+        })
+        return res.json({ success: true, message: "Modifier!" })
+    }
 })
 
 produitR.post("/Produit/Achat-Confirmation", (req, res) => {
@@ -96,7 +149,7 @@ produitR.post("/Produit/Achat/Confirmation", async (req, res) => {
 
         if (!nom || !prenom || typeof (nom) != "string" || typeof (prenom) != "string") {
             error = ["Completez vos information!"]
-            res.render("pages/confirmation", { error })
+            return res.render("pages/confirmation", { error })
         }
 
         nom = nom.toLowerCase()

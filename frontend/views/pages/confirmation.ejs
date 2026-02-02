@@ -7,6 +7,7 @@
     <title>Cité De Soin Et Beauté</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/confirmation.css">
+    <link rel="stylesheet" href="/css/cart.css">
     <link rel="shortcut icon" href="/img/icon.jpg" type="image/x-icon">
 </head>
 
@@ -16,34 +17,72 @@
     </div>
 
     <div id="everything">
-        <%- include("../includes/topbar") %>
+        <header lass="maincontainer" id="">
+            <div class="topcontainer">
+                <nav class="navigation">
+                    <div id="part1-nav">
+                        <a href="/">Cité de Soin & Beauté</a>
+                    </div>
+                    <div id="part2-nav">
+                        <div class="sectionsnav">
+                            <a href="/A-propos-de-nous">À propos de nous</a>
+                            <a href="/Produits">Produits</a>
+                            <div class="contact">
+                                <a href="#contactez-nous">Contactez-nous</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <script src="/js/cartclick.js"></script>
+        </header>
 
-            <main>
+        <main>
+            <%- include("../includes/cart") %>
                 <div class="centering">
                     <div class="containerform">
                         <div class="part1cart">
-                            
+                            <div class="scrollablet">
+                                <h3 style="text-align: center; background-color: rgb(227, 227, 227); ">Votre Panier</h3>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Produit</th>
+                                            <th>Quantité</th>
+                                            <th>Prix</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="part2info">
                             <form action="/Produit/Achat/Confirmation" method="post">
                                 <div class="errorpart">
                                     <% if(error) {%>
-                                       <p><%= error %> </p>
+                                        <p>
+                                            <%= error %>
+                                        </p>
                                         <% } %>
                                 </div>
                                 <div class="topform">
                                     <div class="partone">
+                                        <label for="nom">Nom *:</label>
                                         <input type="text" name="nom" id="nom" placeholder="Nom">
                                     </div>
                                     <div class="parttwo">
+                                        <label for="prenom">Prenom *:</label>
                                         <input type="text" name="prenom" id="prenom" placeholder="Prénom">
                                     </div>
                                 </div>
                                 <div class="centerform">
                                     <div class="partone">
+                                        <label for="nomt">Numéro de téléphone :</label>
                                         <input type="text" name="numt" id="nomt" placeholder="Numéro de téléphone">
                                     </div>
                                     <div class="parttwo">
+                                        <label for="ville">Ville :</label>
                                         <select name="ville" id="ville">
                                             <option>Casablanca</option>
                                             <option>Fès</option>
@@ -151,6 +190,7 @@
                                 </div>
                                 <div class="bottomform">
                                     <div class="partone">
+                                        <label for="adresse">Adresse :</label>
                                         <input type="text" name="adresse" id="adresse" placeholder="Adresse">
                                     </div>
                                 </div>
@@ -158,71 +198,19 @@
                                     <button type="submit">Confirmer</button>
                                 </div>
                                 <div class="infosection">
-                                    <p>Si vous avez déjà commander un produit, veuillez entrer que votre nom et prenom</p>
+                                    <p>Si vous avez déjà commander un produit, veuillez entrer que votre nom et
+                                        prenom</p>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-            </main>
+        </main>
 
-            <%- include("../includes/footer") %>
+        <%- include("../includes/footer") %>
     </div>
 
-    <script>
-        window.addEventListener("load", () => {
-            document.getElementById("loader").classList.add("hide");
-            document.getElementById("everything").classList.add("show");
-
-            function ProduitSession() {
-                const produitlist = sessionStorage.getItem("produits")
-                const prod = JSON.parse(produitlist)
-                if (prod)
-                    return prod.data
-                else
-                    document.location.href = "/Produits"
-            }
-
-            function CartCookie() {
-                const value = `; ${document.cookie}`
-                let cartCookie = value.split(`; cart=`)
-                if (cartCookie.length === 2)
-                    cartCookie = cartCookie.pop().split(';').shift()
-
-                return JSON.parse(decodeURIComponent(cartCookie))
-            }
-
-
-            function onCart() {
-                const prod = ProduitSession()
-                const cartvals = CartCookie()
-
-                const cartdiv = document.querySelector(".cartc")
-
-                let centercart = document.querySelector(".part1cart")
-                centercart.innerHTML = ""
-
-                let divadd = ""
-                cartvals.map(element => {
-                    const product = prod.find(p => p.id === element.id)
-                    divadd += `<div class="template">
-                            <div class="part1h4">
-                                <img src="${product.imageurl}" alt="">
-                                <p>${product.name}</p>
-                            </div>
-                            <div class="part2h4">
-                                <input type="text" name="" id="" value="${element.qte}" readonly>
-                                <p>${element.qte * product.price}DH</p>
-                                <button type="reset">x</button>
-                            </div>
-                        </div>`
-                });
-
-                centercart.innerHTML = '<div class="toppart"><h4>Votre Panier</h4></div>' + divadd
-            }
-
-            onCart()
-        });    </script>
+    <script src="/js/confirmation.js"></script>
 </body>
 
 </html>

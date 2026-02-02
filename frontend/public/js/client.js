@@ -24,7 +24,7 @@ window.addEventListener("load", async () => {
 
     async function LoadProduits() {
         Loading()
-        const reslutat = await fetch("/api/Liste-Clients").then((res) => res.json())
+        await fetch("/api/Liste-Clients").then((res) => res.json())
             .then(data => {
                 stopLoading()
 

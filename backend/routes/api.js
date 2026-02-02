@@ -10,6 +10,7 @@ api.get("/api/Liste-Produits", async (req, res) => {
         res.json(data)
     } catch (err) {
         console.error(err);
+        res.redirect("/Produits")
     }
 })
 

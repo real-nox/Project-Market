@@ -7,7 +7,9 @@
     <title>Cité De Soin Et Beauté</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/produit.css">
+    <link rel="stylesheet" href="/css/cart.css">
     <link rel="shortcut icon" href="/img/icon.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=close" />
 </head>
 
 <body>
@@ -19,67 +21,67 @@
         <%- include("../includes/topbar") %>
 
             <main>
-                <div class="productsc">
-                    <div class="cetproduit">
-                        <h1><%= produit.name%></h1>
-                        <div class="centerproduit">
-                            <div class="side1">
-                                <img src="<%= produit.imageurl%>" alt="">
-                            </div>
-                            <div class="side2">
-                                <div class="top">
-                                    <h2><%= produit.name%></h2>
-                                    <h4><%= produit.price%><span> DH</span></h4>
-                                </div>
-                                <div class="center">
-                                    <p><%= produit.description%></p>
-                                </div>
-                                <div class="bottom">
-                                    <div class="amount">
-                                        <span class="rig">-</span>
-                                        <input type="text" value="1" name="counter" id="counter" class="counter" max="<%= produit.stock%>" readonly>
-                                        <span class="lef">+</span>
+                <%- include("../includes/cart") %>
+                    <div class="productsc">
+                        <div id="responsecard" class="responsecard"></div>
+                        <div class="cetproduit">
+                            <div class="centerproduit">
+                                <div class="containerP">
+                                    <div class="side1">
+                                        <div class="slides">
+                                            <div class="imgs">
+                                                <img src="<%= produit.imageurl%>" alt="">
+                                                <img src="<%= produit.imageurl2 ? produit.imageurl2 : '' %>" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="downbar">
+                                            <a href="#" data-index="0">
+                                                <img src="<%= produit.imageurl%>" alt="">
+                                            </a>
+                                            <a href="#" data-index="1">
+                                                <img src="<%= produit.imageurl2 ? produit.imageurl2 : '' %>" alt="">
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="acht">
-                                        <button type="submit">Acheter</button>
+                                    <div class="between"></div>
+                                    <div class="side2">
+                                        <div class="top">
+                                            <h2>
+                                                <%= produit.name%>
+                                            </h2>
+                                            <h4>
+                                                <%= produit.price%><span> DH</span>
+                                            </h4>
+                                        </div>
+                                        <div class="center">
+                                            <p>
+                                                <%= produit.description%>
+                                            </p>
+                                        </div>
+                                        <div class="bottom">
+                                            <form style="display: flex; gap: 10px;" action="/Produit/<%= produit.id%>" method="post">
+                                                <div class="amount">
+                                                    <span class="rig">-</span>
+                                                    <input type="text" value="1" name="counter" id="counter"
+                                                        class="counter" max="<%= produit.stock%>" readonly>
+                                                    <span class="lef">+</span>
+                                                </div>
+                                                <div class="acht">
+                                                    <button class="btnach" type="button" data-id="<%= produit.id%>">Acheter</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </main>
 
             <%- include("../includes/footer") %>
     </div>
 
-    <script>
-        window.addEventListener("load", () => {
-            document.getElementById("loader").classList.add("hide");
-            document.getElementById("everything").classList.add("show");
-
-            const btnarig = document.querySelector(".rig")
-            const btnalef = document.querySelector(".lef")
-
-            let inp = document.getElementById("counter")
-
-            btnarig.addEventListener("click", (e) => {
-                let c = parseInt(inp.value)
-                console.log(c)
-                if (c === 1)
-                    return
-                inp.value = c - 1
-            })
-
-            btnalef.addEventListener("click", (e) => {
-                let c = parseInt(inp.value)
-                console.log(c)
-                if (c === 20)
-                    return
-                inp.value = c + 1
-            })
-        });
-    </script>
+    <script src="/js/produit.js"></script>
 </body>
 
 </html>
