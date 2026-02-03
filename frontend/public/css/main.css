@@ -479,6 +479,14 @@ body,
     height: 25vh;
 }
 
+.speratorx {
+    background-image: linear-gradient(to top,
+            #fffcfd 0%,
+            #ffabcf 70%,
+            #ff97c0 100%);
+    height: 25vh;
+}
+
 /*INSTA FEED*/
 
 .instaFeed {
