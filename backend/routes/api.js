@@ -95,7 +95,7 @@ api.post("/api/SendMSGContact", RateLimit("main"), async(req, res) => {
     try {
         const info = req.body
 
-        const data = await SendEmail(info.nomc, info.email, info.message)
+        const data = await SendEmail(info.email, info.nomc, info.message)
         return res.redirect("/")
     } catch (err) {
         console.error(err);
