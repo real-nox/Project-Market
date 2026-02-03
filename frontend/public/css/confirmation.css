@@ -101,3 +101,38 @@
 .errorpart p {
     color: rgb(225, 68, 68);
 }
+
+/*Phones*/
+@media only screen and (max-width: 950px) {
+
+    .centering {
+        height: auto;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .containerform {
+        width: 90%;
+        display: inline-block;
+    }
+
+    .part1cart,
+    .part2info {
+        width: 100%;
+    }
+
+    .topform,
+    .centerform,
+    .bottomform {
+        height: auto;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .infosection {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        padding-bottom: 2rem;
+    }
+}

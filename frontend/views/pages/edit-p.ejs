@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="shortcut icon" href="/img/icon.jpg" type="image/x-icon">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 
 <body>
@@ -71,7 +73,7 @@
                                         </div>
                                     </div>
                                     <div class="btnitempr">
-                                            <button id="btncool" type="submit">Modifier</button>
+                                        <button id="btncool" type="submit">Modifier</button>
                                         <div id="responsecard"
                                             class="responsecard <%= (errors && errors.length) ? 'open err' : '' || (success && success.length) ? 'open success' : '' %>">
                                             <% if (errors && errors.length) { %>
@@ -100,11 +102,11 @@
                                 </form>
                             </div>
                             <form action="/Ad/Produits/Retirer/<%=produitinfo.id%>" method="post">
-                            <div class="retirerbtn"
-                                style="display: flex; justify-content: end;justify-content: end; width: 100%; padding-top: 50px;">
-                                <button style="height: 50%;" id="btncool1" type="submit">Retirer</button>
-                            </div>
-                        </form>
+                                <div class="retirerbtn"
+                                    style="display: flex; justify-content: end;justify-content: end; width: 100%; padding-top: 50px;">
+                                    <button style="height: 50%;" id="btncool1" type="submit">Retirer</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

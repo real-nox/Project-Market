@@ -22,7 +22,10 @@ html {
 }
 
 #everything.show {
-    display: block;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    overflow-x: hidden;
 }
 
 #spinner {
@@ -48,7 +51,6 @@ html {
 body,
 .maincontainer {
     width: 100%;
-    min-height: 100vh;
     height: auto;
 }
 
@@ -60,7 +62,6 @@ body,
 .topcontainer .navigation {
     display: flex;
     justify-content: space-between;
-    padding: 30px 120px 0px 100px;
 }
 
 .topcontainer #part2-nav {
@@ -78,6 +79,7 @@ body,
 .topcontainer #part2-nav {
     display: flex;
     justify-content: center;
+    width: auto;
 }
 
 .topcontainer #part1-nav a {
@@ -105,7 +107,7 @@ body,
     color: rgb(215, 23, 103);
 }
 
-.topcontainer #part2-nav .contact {
+.contact {
     background-color: rgb(255, 146, 200);
     border: 2px solid rgb(255, 197, 226);
 
@@ -121,23 +123,23 @@ body,
     transition: all 0.5s ease;
 }
 
-.topcontainer #part2-nav .contact a {
+.contact a {
     color: rgb(0, 0, 0);
     transition: all 0.5s all;
 }
 
-.topcontainer #part2-nav .contact a:hover {
+.contact a:hover {
     color: white;
 }
 
-.topcontainer #part2-nav .contact:hover {
+.contact:hover {
     background-color: rgb(255, 192, 224);
 }
 
 /*Part1 center*/
 
 .stcontainer {
-    height: 100vh;
+    height: auto;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
@@ -364,12 +366,10 @@ body,
 
 .templateP .backgroundtemp,
 .templateP:nth-child(2n) .backgroundtemp {
-    padding-top: 15px;
     width: 100%;
 
     display: flex;
     justify-content: center;
-    padding-bottom: 25px;
 }
 
 .templateP .downtemp,
@@ -404,6 +404,11 @@ body,
     100% {
         background-position: 200% 0;
     }
+}
+
+.backgroundtemp img {
+    width: 300px;
+    height: 300px
 }
 
 .product-img {
@@ -479,9 +484,10 @@ body,
 
 .instaFeed {
     background-color: #ff97c0;
-    height: 100vh;
+    height: auto;
     display: flex;
     justify-content: center;
+    padding-bottom: 50px;
 }
 
 .instaFeed .feeds {
@@ -508,8 +514,8 @@ body,
 
 .listfeed .feedcol2 {
     display: grid;
-    grid-template-columns: 210px 210px 210px;
-    grid-template-rows: 210px 210px 210px;
+    width: 53%;
+    grid-template-columns: repeat(auto-fit, 210px);
     grid-gap: 10px;
 }
 
@@ -916,4 +922,237 @@ body,
 
 .responsecard.open.success {
     color: rgb(41, 147, 41);
+}
+
+.list {
+    cursor: pointer;
+}
+
+/*Phones*/
+@media only screen and (max-width: 950px) {
+
+    /* Top */
+    header {
+        height: auto;
+    }
+
+    .mobilec {
+        position: relative;
+        max-height: 0;
+        width: 100%;
+
+        background-color: rebeccapurple;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        overflow: hidden;
+
+        transition: max-height 0.5s ease, opacity 0.4s ease;
+    }
+
+    .mobilec.show {
+        max-height: 300px;
+        opacity: 1;
+        padding-bottom: 0.5rem;
+    }
+
+    .topcontainer {
+        height: auto;
+    }
+
+    .maincontainer,
+    .topcontainer,
+    .navigation {
+        width: auto;
+    }
+
+    .navigation {
+        padding: 1.5em 3em 1.5em 3em;
+    }
+
+    .sectionsnav {
+        padding: 1.1em;
+        height: auto;
+        display: grid;
+        text-align: center;
+        grid-template-rows: repeat(3, 2rem);
+    }
+
+    .sectionsnav a {
+        font-size: 16px;
+    }
+
+    .sectionsnav a {
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+        transition: all 0.9s ease-in-out;
+    }
+
+    .sectionsnav a:hover {
+        color: rgb(255, 140, 188);
+    }
+
+    /*  Center */
+
+    .pinktop {
+        height: auto;
+        width: 100%;
+    }
+
+    .pinktop .centering {
+        padding: 2em 2.5em 0.5em 2.5em;
+        display: flex;
+        flex-direction: column;
+        gap: 3em;
+    }
+
+    .textside {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .textside h1 {
+        width: fit-content;
+        height: auto;
+        font-size: 1.5rem;
+        padding-bottom: 35px;
+    }
+
+    .textside p {
+        width: fit-content;
+    }
+
+    .pinktop .picside img {
+        height: 100%;
+        width: 100%;
+    }
+
+    .pinkdown {
+        height: 3.5em;
+        padding: 2em 2.5em 0.5em 2.5em;
+    }
+
+
+    /* Produits */
+
+    .productsc {
+        padding: 2em 2.5em 2.5em 2.5em;
+    }
+
+    .sectop h1 {
+        font-size: 1.3rem;
+    }
+
+    .productsc .produits {
+        display: flex;
+        padding: 0;
+        flex-direction: column;
+    }
+
+    .backgroundtemp img {
+        width: 90%;
+        height: 90%;
+    }
+
+    .templateP .backgroundtemp,
+    .templateP:nth-child(2n) .backgroundtemp {
+        padding-top: 1em;
+        padding-bottom: 0em;
+    }
+
+    .templateP,
+    .templateP:nth-child(2n) {
+        min-height: 27em;
+    }
+
+    /* Insta */
+
+    .instaFeed .feeds {
+        width: 90%;
+        align-items: center;
+    }
+
+    .listfeed {
+        flex-direction: column;
+    }
+
+    .listfeed .feedcol2 {
+        width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 0.75rem;
+    }
+
+    .feedcol1 {
+        width: 100%;
+    }
+
+    .feedcol1 img,
+    .listfeed .feedcol2 img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .contactme {
+        display: flex;
+        flex-direction: column;
+        height: max-content;
+    }
+
+    .contactme .partContact,
+    .contactme .part2Footer {
+        height: auto;
+        width: 100%;
+    }
+
+    .contactme .partContact .contactmec {
+        width: auto;
+        margin: 1em 2em 1em 2em;
+    }
+
+    .items button {
+        height: 4em;
+        width: 8em;
+    }
+
+    .holder .credit2 {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .holder .credit1,
+    .holder .credit3 {
+        justify-content: center;
+    }
+
+    .holder .credit1 {
+        margin-top: 2rem;
+    }
+
+    .holder .credit3 {
+        margin-top: 5rem;
+    }
+
+    .contactus,
+    .followus {
+        width: 100%;
+    }
+}
+
+/*Computer/Large devices*/
+@media only screen and (min-width: 960px) {
+    .navigation {
+        padding: 30px 120px 0px 100px;
+    }
+
+    .templateP .backgroundtemp,
+    .templateP:nth-child(2n) .backgroundtemp {
+        padding-top: 15px;
+        padding-bottom: 25px;
+    }
 }

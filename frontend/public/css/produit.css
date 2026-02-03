@@ -191,3 +191,34 @@
     border: 2px solid rgb(255, 114, 154);
     color: rgb(33, 33, 33);
 }
+
+/*Phones*/
+@media only screen and (max-width: 950px) {
+    .productsc {
+        padding: 0px 1rem 5rem 1rem;
+    }
+
+    .containerP {
+        flex-direction: column;
+    }
+
+    .side1,
+    .between,
+    .side2 {
+        width: 100%;
+        padding: 0;
+    }
+
+    .between {
+        height: 0.2rem;
+    }
+
+    .side2 {
+        padding: 1.5rem 1rem 1.5rem 1rem;
+    }
+
+    .side2 .bottom {
+        display: flex;
+        justify-content: center;
+    }
+}

@@ -69,7 +69,7 @@ table {
     width: 100%;
     height: auto;
     border-collapse: collapse;
-    border : 2px solid rgba(196, 196, 196, 0.57);
+    border: 2px solid rgba(196, 196, 196, 0.57);
     border-radius: 10px;
 }
 
@@ -132,4 +132,13 @@ td input {
 td .delete {
     cursor: pointer;
     color: red;
+}
+
+
+/*Phones*/
+@media only screen and (max-width: 950px) {
+    .cartc {
+        height: 25rem;
+        width: 100%;
+    }
 }

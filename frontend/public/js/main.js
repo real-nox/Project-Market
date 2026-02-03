@@ -26,7 +26,7 @@ window.addEventListener("load", () => {
                                     <p>${price} DH</p>
                                 </div>
                                 <div class="backgroundtemp load">
-                                    <img style="width:300px; height:300px" src="${imageurl}" alt="${name}" class="product-img">
+                                    <img src="${imageurl}" alt="${name}" class="product-img">
                                 </div>
                                 <div class="downtemp">
                                     <button class="downtempbtn" href="Produit/Buy/${id}" onclick="addtoCart()">Buy now </button>
