@@ -3,21 +3,21 @@
         <div class="partContact">
             <div class="contactmec">
                 <h1>Contactez nous</h1>
-                <form action="/SendMSGContact" method="post">
+                <form action="/api/SendMSGContact" method="post">
                     <div class="items">
                         <label>Nom Complet *</label>
                         <input placeholder="ex : Mohammed Amine Sirri" type="text" name="nomc" maxlength="30"
-                            minlength="5">
+                            minlength="5" required>
                     </div>
                     <div class="items">
                         <label>Email *</label>
                         <input placeholder="ex : mohammed.amine@exemple.com" type="text" name="email" maxlength="60"
-                            minlength="5">
+                            minlength="5" required>
                     </div>
                     <div class="items">
                         <label>Message *</label>
                         <textarea placeholder="Saisissez votre message ici." name="message" maxlength="150"
-                            minlength="5"></textarea>
+                            minlength="5" required></textarea>
                     </div>
                     <div class="items">
                         <button type="submit">Envoyer Le Message</button>

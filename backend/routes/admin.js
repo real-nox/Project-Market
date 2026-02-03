@@ -6,8 +6,9 @@ const { genSaltSync, hashSync, compareSync } = require("bcrypt")
 const { upload } = require("../middleware/upload")
 
 const Sessions = require("../middleware/session-cart")
-const { admin, RateLimit } = require("../middleware/adminL")
+const { admin } = require("../middleware/adminL")
 const session = require("express-session")
+const { RateLimit } = require("../middleware/rateLimit")
 
 const AdminR = express.Router()
 
@@ -53,7 +54,7 @@ AdminR.get("/Ad/Logout", admin, (req, res) => {
     })
 })
 
-AdminR.post("/Ad/Login", RateLimit, (req, res) => {
+AdminR.post("/Ad/Login", RateLimit("admin"), (req, res) => {
     let errors = []
     const info = req.body
 

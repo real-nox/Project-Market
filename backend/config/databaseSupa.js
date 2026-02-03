@@ -6,7 +6,16 @@ const fs = require("fs")
 const url = process.env.DATABASE_URL
 const key = process.env.DATABASE_KEY
 
-const supabase = createClient(url, key)
+let supabase = null
+
+function LoadData () {
+    try {
+        supabase = createClient(url, key)
+        return console.log("Connected to the database!")
+    } catch (err) {
+        console.error(err);  
+    }
+}
 
 async function FetchROWViaNameP(nomp) {
     const { data, error } = await supabase
@@ -223,6 +232,7 @@ async function RemoveProduct(id) {
 
 module.exports = {
     supabase,
+    LoadData,
     FetchROWViaNameP,
     FetchROWViaIDP,
     StoreIMGBucket,

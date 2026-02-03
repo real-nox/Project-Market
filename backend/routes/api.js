@@ -2,6 +2,8 @@ const express = require("express")
 const api = express.Router()
 
 const { ShowProducts, ShowAdProducts, ShowClients, ShowOrderViaClient, ShowSpecificProduct, ListeOrder, ShowSpecificClient } = require("../config/databaseSupa")
+const { SendEmail } = require("../middleware/email")
+const { RateLimit } = require("../middleware/rateLimit")
 
 api.get("/api/Liste-Produits", async (req, res) => {
     try {
@@ -84,6 +86,17 @@ api.get("/api/Liste-Commandes", async (req, res) => {
         }
 
         res.json(list)
+    } catch (err) {
+        console.error(err);
+    }
+})
+
+api.post("/api/SendMSGContact", RateLimit("main"), async(req, res) => {
+    try {
+        const info = req.body
+
+        const data = await SendEmail(info.nomc, info.email, info.message)
+        return res.redirect("/")
     } catch (err) {
         console.error(err);
     }

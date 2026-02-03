@@ -9,6 +9,7 @@ const { AdminR } = require("./routes/admin")
 const { produitR } = require("./routes/produits")
 const { api } = require("./routes/api")
 const Sessions = require("./middleware/session-cart")
+const { LoadData } = require("./config/databaseSupa")
 
 app.set("views", path.join(__dirname, "../frontend/views"))
 app.set("view engine", "ejs")
@@ -32,4 +33,5 @@ app.get("/", (req, res) => {
 
 app.listen(3000, async () => {
     console.log("I'm Alive")
+    LoadData()
 })
