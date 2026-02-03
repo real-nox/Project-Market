@@ -294,6 +294,10 @@ tr td img {
         font-size: 1.2rem
     }
 
+    .centerpart.ad {
+        height: 27.4rem;
+    }
+
     .centerpart {
         padding-top: 5rem;
         height: auto;

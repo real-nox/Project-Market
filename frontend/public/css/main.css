@@ -275,7 +275,6 @@ body,
 .productsc .produits {
     width: 100%;
     display: grid;
-    padding: 10px 50px;
 
     grid-template-columns: repeat(3, 0.9fr);
     grid-auto-rows: 72vh;
@@ -896,8 +895,8 @@ body,
 }
 
 .responsecard {
-    background-color: rgb(255, 142, 200);
-    border: 2px solid #f56af5;
+    background-color: rgb(52, 52, 52);
+    border: 2px solid #686868;
     color: white;
     padding: 10px;
 
@@ -917,11 +916,11 @@ body,
 }
 
 .responsecard.open.err {
-    color: rgba(255, 30, 30, 0.932);
+    color: rgba(255, 0, 0, 0.932);
 }
 
 .responsecard.open.success {
-    color: rgb(41, 147, 41);
+    color: rgb(13, 110, 14);
 }
 
 .list {
